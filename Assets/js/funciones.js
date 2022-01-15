@@ -1138,6 +1138,100 @@ function deleteImg(){
     document.getElementById('imagen').value='';
     document.getElementById('imagen_actual').value='';
 }
+/** Fin de productos*/
+/*******************************/
+/** inicio de compras */
+function buscarCodigo(e){
+    e.preventDefault();
+    if(e.which == 13){
+        const cod = document.getElementById("codigo").value;
+        const url =base_url + "Compras/buscarCodigo/"+ cod;
+        const http=new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange=function(){
+                if(this.readyState == 4 && this.status ==200){
+                    const res =JSON.parse(this.responseText);
+                    if(res){
+                        document.getElementById("nombre").value = res.descripcion;
+                        document.getElementById("precio").value = res.precio_compra;
+                        document.getElementById("id").value = res.id;
+                        document.getElementById("cantidad").focus();
+                    }else{
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'El producto no existe',
+                            showConfirmButton: false,
+                         timer: 2000
+                        })
+                        document.getElementById("codigo").value='';
+                        document.getElementById("codigo").focus();
+                    }
+        
+                }
+        }
+    }
+}
+
+function calcularPrecio(e){
+    e.preventDefault();
+    const cant = document.getElementById("cantidad").value;
+    const precio = document.getElementById("precio").value;
+    document.getElementById("sub_total").value= precio * cant;
+    if(e.which == 13){
+        if(cant > 0){
+            const url =base_url + "Compras/ingresar";
+            const frm =document.getElementById("frmCompra");
+            const http=new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(new FormData (frm));
+            http.onreadystatechange=function(){
+                if(this.readyState == 4 && this.status ==200){
+                    const res= JSON.parse(this.responseText);
+                    if(res == 'ok'){
+                        frm.reset();
+                        cargaDetalle();
+                    }
+                        
+            
+                }
+            }
+        }
+
+    }
+    
+}
+cargaDetalle();
+function cargaDetalle(){
+    const url =base_url + "Compras/listar";
+    const http=new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange=function(){
+        if(this.readyState == 4 && this.status ==200){
+           const res = JSON.parse(this.responseText);
+           let html ='';
+           res.forEach(row => {
+                html +=`<tr>
+                    <td>${row['id']}</td>
+                    <td>${row['descripcion']}</td>
+                    <td>${row['cantidad']}</td>
+                    <td>${row['precio']}</td>
+                    <td>${row['sub_total']}</td>
+                    <td></td>
+
+
+                </tr>`;
+            }); 
+            document.getElementById("tblDetalle").innerHTML = html;      
+                        
+            
+        }
+    }
+}
+/** Fin de compras*/
+/*******************************/
 
 
                      

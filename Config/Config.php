@@ -1,5 +1,5 @@
 <?php
-    Const base_url = "http://localhost/proyectos/tiendago/";
+    Const base_url = "http://localhost/proyecto/tiendago/";
     Const host = "localhost";
     Const user= "root";
     Const pass= "";

@@ -70,6 +70,11 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Productos"><i class="fas fa-folder"></i>Productos</a>
                                 </nav>
                             </div>
+                            <!-- menu de compras-->
+                            <a class="nav-link" href="<?php echo base_url; ?>Compras" >
+                                <div class="sb-nav-link-icon"><i class="fas fa-users text-success"></i></div>
+                                Compras 
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
