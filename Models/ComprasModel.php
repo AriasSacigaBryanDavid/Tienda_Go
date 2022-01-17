@@ -18,7 +18,7 @@
    }
    public function registrarDetalle(int $id_producto,int $id_usuario,string $precio,int $cantidad,string $sub_total)
    {
-       $sql = "INSERT INTO detalle(id_producto, id_usuario, precio, cantidad, subtotal) VALUES (?,?,?,?,?)";
+       $sql = "INSERT INTO detalle(id_producto, id_usuario, precio, cantidad, sub_total) VALUES (?,?,?,?,?)";
        $datos = array($id_producto, $id_usuario, $precio, $cantidad, $sub_total);
        $data = $this->save($sql, $datos);
        if($data ==1){
