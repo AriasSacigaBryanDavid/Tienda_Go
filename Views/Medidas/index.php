@@ -3,7 +3,7 @@
     <li class="breadcrumb-item active">Medidas</li>
     </ol>
     <button class="btn btn-primary mb-2" type="button" onclick="frmMedida();"><i class="fas fa-plus"></i></button>
-    <table class="table table-dark" id="tblMedidas">
+    <table class="table table-dark table-hover" id="tblMedidas">
         <thead class="thead-dark">
             <tr>
                 <th>Id</th>

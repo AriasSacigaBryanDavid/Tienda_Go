@@ -3,7 +3,7 @@
     <li class="breadcrumb-item active">Categorias</li>
     </ol>
     <button class="btn btn-primary mb-2" type="button" onclick="frmCategoria();"><i class="fas fa-plus"></i></button>
-    <table class="table table-dark" id="tblCategorias">
+    <table class="table table-dark table-hover" id="tblCategorias">
         <thead class="thead-dark">
             <tr>
                 <th>Id</th>

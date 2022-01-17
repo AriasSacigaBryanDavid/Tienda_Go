@@ -5,7 +5,7 @@
 
     <button class="btn btn-primary m-2" type="button" onclick="frmCaja();"><i class="fas fa-plus"></i></button>
 
-    <table class="table table-dark" id="tblCajas">
+    <table class="table table-dark table-hover" id="tblCajas">
         <thead class="thead-dark">
             <tr>
                 <th>Id</th>

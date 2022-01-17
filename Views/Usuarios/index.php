@@ -3,7 +3,7 @@
     <li class="breadcrumb-item active">Usuarios</li>
     </ol>
     <button class="btn btn-primary mb-2" type="button" onclick="frmUsuario();" ><i class="fas fa-user-plus"></i></button>
-    <table class="table table-dark " id="tblUsuarios">
+    <table class="table table-dark table-hover" id="tblUsuarios">
         <thead class="thead-dark">
             <tr>
                 <th>Id</th>
