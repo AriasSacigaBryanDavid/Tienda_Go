@@ -1188,7 +1188,7 @@ function calcularPrecio(e){
             http.send(new FormData (frm));
             http.onreadystatechange=function(){
                 if(this.readyState == 4 && this.status ==200){
-                    const res= JSON.parse(this.responseText);
+                    const res = JSON.parse(this.responseText);
                     if(res == 'ok'){
                         alert('ingresado');
                         frm.reset();
