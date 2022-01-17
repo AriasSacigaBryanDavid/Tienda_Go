@@ -1212,23 +1212,42 @@ function cargaDetalle(){
         if(this.readyState == 4 && this.status ==200){
            const res = JSON.parse(this.responseText);
            let html ='';
-           res.forEach(row => {
+           res.detalle.forEach(row => {
                 html +=`<tr>
                     <td>${row['id']}</td>
                     <td>${row['descripcion']}</td>
                     <td>${row['cantidad']}</td>
                     <td>${row['precio']}</td>
                     <td>${row['sub_total']}</td>
-                    <td></td>
+                    <td>
+                        <button class="btn btn-danger" type=""button" onclick="deleteDetalle(${row['id']})">
+                        <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
 
 
                 </tr>`;
             }); 
-            document.getElementById("tblDetalle").innerHTML = html;      
-                        
-            
+            document.getElementById("tblDetalle").innerHTML = html; 
+            document.getElementById("total").value = res.total_pagar.total;      
+   
         }
     }
+}
+
+function deleteDetalle(id){
+        const url =base_url + "Compras/delete/"+id;
+        const http=new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange=function(){
+            if(this.readyState == 4 && this.status ==200){
+              const res=JSON
+              if(){
+                  
+              }
+            }
+        }
 }
 /** Fin de compras*/
 /*******************************/
