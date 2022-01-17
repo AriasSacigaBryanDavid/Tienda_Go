@@ -1190,6 +1190,11 @@ function calcularPrecio(e){
                 if(this.readyState == 4 && this.status ==200){
                     const res= JSON.parse(this.responseText);
                     if(res == 'ok'){
+                        alert('ingresado');
+                        frm.reset();
+                        cargaDetalle();
+                    }else if(res == 'modificado'){
+                        alert('producto actualizado');
                         frm.reset();
                         cargaDetalle();
                     }
@@ -1244,11 +1249,27 @@ function deleteDetalle(id){
             if(this.readyState == 4 && this.status ==200){
               const res=JSON.parse(this.responseText);
               if( res == 'ok'){
-                  
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Producto eliminado',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                cargaDetalle();
+              }else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Error de eliminar producto',
+                    showConfirmButton: false,
+                     timer: 2000
+                })
               }
             }
         }
 }
+
 /** Fin de compras*/
 /*******************************/
 
