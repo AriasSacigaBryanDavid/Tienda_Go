@@ -74,6 +74,22 @@
             }
             return $res;
         }
+        public function id_compra(){
+            $sql = "SELECT MAX(id) AS id FROM compras";
+            $data = $this->select($sql);
+            return $data;
+        }
+        public function registrarDetalleCompra(int $id_compra, int $id_pro, int $cantidad, string $precio, string $sub_total){
+            $sql = "INSERT INTO detalle_compra(id_compra, id_producto,cantidad, precio, sub_total) VALUES (?,?,?,?,?)";
+            $datos = array($id_compra, $id_pro, $cantidad, $precio, $sub_total);
+            $data = $this->save($sql, $datos);
+            if($data ==1){
+                $res = "ok";
+            }else{
+                $res ="error";
+            }
+            return $res;
+        }
         
 
      

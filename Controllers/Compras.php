@@ -70,12 +70,31 @@
             $total = $this->model->calcularCompra($id_usuario);
             $data = $this->model->registrarCompra($total['total']);
             if($data == 'ok'){
+                $detalle = $this->model->getDetalle($id_usuario);
+                $id_compra = $this->model->id_compra();
+                foreach($detalle as $row){
+                    $cantidad = $row['cantidad'];
+                    $precio = $row['precio'];
+                    $id_pro = $row['id_producto'];
+                    $sub_total = $cantidad * $precio;
+                    $this->model->registrarDetalleCompra($id_compra['id'],$id_pro, $cantidad, $precio, $sub_total);
+                }
                 $msg ='ok';
             }else{
                 $msg='Error al realizar la compra';
             }
             echo json_encode($msg);
             die();
+        }
+        public function generarPdf($id_compra){
+            require('Libraries/fpdf/fpdf.php');
+
+            $pdf = new FPDF('P','mm', array(80, 200));
+            $pdf->AddPage();
+            $pdf->SetTitle('Reporte Compra');
+            $pdf->SetFont('Arial','B',16);
+            $pdf->Cell(65,10, utf8_decode('Tienda Go'));
+            $pdf->Output();
         }
 
     }
