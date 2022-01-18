@@ -26,10 +26,10 @@
             $id_usuario = $_SESSION['id_usuario'];
             $precio =$datos['precio_compra'];
             $cantidad =$_POST['cantidad'];
-            $comprobar = $this->model-consultarDetalle($id_producto, $id_usuario);
+            $comprobar = $this->model->consultarDetalle($id_producto, $id_usuario);
             if (empty($comprobar)) {
                 $sub_total= $precio * $cantidad;
-                $data=$this->model->registrarDetalle($id_producto,$id_usuario,$precio,$cantidad, $sub_total);
+                $data= $this->model->registrarDetalle($id_producto,$id_usuario,$precio,$cantidad, $sub_total);
                     if($data == "ok"){
                     $msg = "ok";
                     }else{
@@ -38,7 +38,7 @@
             }else{
                 $total_cantidad= $comprobar['cantidad'] + $cantidad;
                 $sub_total = $total_cantidad * $precio;
-                $data=$this->model->actualizarDetalle($precio, $total_cantidad, $sub_total,$id_producto,$id_usuario);
+                $data= $this->model->actualizarDetalle($precio, $total_cantidad, $sub_total, $id_producto, $id_usuario);
                     if($data == "modificado"){
                     $msg = "modificado";
                     }else{
