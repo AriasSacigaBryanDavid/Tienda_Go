@@ -1282,6 +1282,44 @@ function deleteDetalle(id){
         }
 }
 
+function generarCompra(){
+    Swal.fire({
+        title: '¿Está seguro de realizar la compra?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url =base_url + "Compras/registrarCompra";
+            const http=new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange=function(){
+                if(this.readyState == 4 && this.status ==200){
+                    const res = JSON.parse(this.responseText);
+                    if (res == "ok" ){
+                        Swal.fire(
+                            'Mensaje!',
+                            'Compra generada.',
+                            'success'
+                        )
+                    }else{
+                        Swal.fire(
+                            'Mensaje!',
+                            res,
+                            'error'
+                        )
+                    }
+                }
+            }
+            
+        }
+      })   
+}
+
 /** Fin de compras*/
 /*******************************/
 

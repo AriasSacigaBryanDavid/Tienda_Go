@@ -65,6 +65,18 @@
             echo json_encode($msg);
             die();
         }
+        public function registrarCompra(){
+            $id_usuario = $_SESSION['id_usuario'];
+            $total = $this->model->calcularCompra($id_usuario);
+            $data = $this->model->registrarCompra($total['total']);
+            if($data == 'ok'){
+                $msg ='ok';
+            }else{
+                $msg='Error al realizar la compra';
+            }
+            echo json_encode($msg);
+            die();
+        }
 
     }
 

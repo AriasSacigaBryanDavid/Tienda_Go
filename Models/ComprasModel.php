@@ -10,14 +10,12 @@
             $data = $this->select($sql);
             return $data;
         }
-        public function getProductos(int $id)
-        {
+        public function getProductos(int $id){
             $sql="SELECT * FROM productos WHERE id =$id ";
             $data = $this->select($sql);
             return $data;
         }
-        public function registrarDetalle(int $id_producto, int $id_usuario, string $precio, int $cantidad, string $sub_total)
-        {
+        public function registrarDetalle(int $id_producto, int $id_usuario, string $precio, int $cantidad, string $sub_total){
             $sql = "INSERT INTO detalle(id_producto, id_usuario, precio, cantidad, sub_total) VALUES (?,?,?,?,?)";
             $datos = array($id_producto, $id_usuario, $precio, $cantidad, $sub_total);
             $data = $this->save($sql, $datos);
@@ -33,7 +31,6 @@
             $data= $this-> selectAll($sql);
             return $data;
         }
-
         public function calcularCompra(int $id_usuario){
             $sql = "SELECT sub_total, SUM(sub_total) AS total FROM detalle WHERE id_usuario=$id_usuario";
             $data= $this-> select($sql);
@@ -61,6 +58,17 @@
             $data = $this->save($sql,$datos);
             if($data ==1){
                 $res ="modificado";
+            }else{
+                $res ="error";
+            }
+            return $res;
+        }
+        public function registrarCompra(string $total){
+            $sql = "INSERT INTO compras(total) VALUES (?)";
+            $datos = array($total);
+            $data = $this->save($sql, $datos);
+            if($data ==1){
+                $res = "ok";
             }else{
                 $res ="error";
             }
