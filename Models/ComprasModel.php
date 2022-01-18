@@ -55,7 +55,7 @@
             $data= $this->select($sql);
             return $data;
         }
-        public function actualizarDetalle(string $precio,int $cantidad, int $sub_total, int $id_producto,int $id_usuario){
+        public function actualizarDetalle(string $precio, int $cantidad, int $sub_total, int $id_producto, int $id_usuario){
             $sql = "UPDATE detalle SET precio = ?, cantidad = ?, sub_total = ? WHERE id_producto = ? AND id_usuario = ?";
             $datos = array($precio, $cantidad, $sub_total, $id_producto, $id_usuario);
             $data = $this->save($sql,$datos);

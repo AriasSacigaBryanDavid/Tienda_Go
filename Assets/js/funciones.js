@@ -1161,7 +1161,7 @@ function buscarCodigo(e){
                         Swal.fire({
                             position: 'top-end',
                             icon: 'error',
-                            title: 'El producto no existe',
+                            title: 'El Producto no existe',
                             showConfirmButton: false,
                          timer: 2000
                         })
@@ -1190,11 +1190,23 @@ function calcularPrecio(e){
                 if(this.readyState == 4 && this.status ==200){
                     const res = JSON.parse(this.responseText);
                     if(res == 'ok'){
-                        alert('ingresado');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Producto Ingresado',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
                         frm.reset();
                         cargaDetalle();
                     }else if(res == 'modificado'){
-                        alert('producto actualizado');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Producto Actualizado',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
                         frm.reset();
                         cargaDetalle();
                     }
@@ -1252,7 +1264,7 @@ function deleteDetalle(id){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Producto eliminado',
+                    title: 'Producto Eliminado',
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -1261,7 +1273,7 @@ function deleteDetalle(id){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Error de eliminar producto',
+                    title: 'Error de Eliminar Producto',
                     showConfirmButton: false,
                      timer: 2000
                 })
