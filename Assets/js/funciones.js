@@ -1306,6 +1306,8 @@ function generarCompra(){
                             'Compra generada.',
                             'success'
                         )
+                        const ruta =base_url + 'Compras/generarPdf/2';
+                        window.open(ruta);
                     }else{
                         Swal.fire(
                             'Mensaje!',

@@ -87,7 +87,6 @@
             die();
         }
         public function generarPdf($id_compra){
-
             $empresa = $this->model->getEmpresa();
             require('Libraries/fpdf/fpdf.php');
 
