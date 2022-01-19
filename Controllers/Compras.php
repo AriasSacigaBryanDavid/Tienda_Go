@@ -92,6 +92,7 @@
         }
         public function generarPdf($id_compra){
             $empresa = $this->model->getEmpresa();
+            $productos = $this->model->getProCompra($id_compra);
             require('Libraries/fpdf/fpdf.php');
 
             $pdf = new FPDF('P','mm', array(80, 200));
@@ -123,10 +124,25 @@
             $pdf->Ln();
 
             //Encabezado de productos
-            $pdf->Cell(10,5, 'Cant', 0,0, 'L');
-            $pdf->Cell(30,5, utf8_decode('Descripción'), 0,0, 'L');
-            $pdf->Cell(10,5, 'Precio', 0,0, 'L');
-            $pdf->Cell(10,5, 'Sub Total', 0,0, 'L');
+            $pdf->SetFillColor(0,0,0);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->Cell(10,5, 'Cant', 0,0, 'L', true);
+            $pdf->Cell(35,5, utf8_decode('Descripción'), 0,0, 'L', true);
+            $pdf->Cell(10,5, 'Precio', 0,0, 'L', true);
+            $pdf->Cell(15,5, 'Sub Total', 0,1, 'L', true);
+    
+            $pdf->SetTextColor(0,0,0);
+            $total = 0.00;
+            foreach ($productos as $row) {
+                $total = $total + $row['sub_total'];
+                $pdf->Cell(10,5, $row['cantidad'], 0, 0, 'L');
+                $pdf->Cell(35,5, utf8_decode($row['descripcion']) , 0,0, 'L');
+                $pdf->Cell(10,5, $row['precio'], 0,0, 'L');
+                $pdf->Cell(15,5, number_format($row['sub_total'], 2, '.',',') , 0,1, 'L');
+            }
+            $pdf->Ln();
+            $pdf->Cell(70, 5, 'Total a pagar', 0,1,'R');
+            $pdf->Cell(70, 5, number_format($total, 2, '.', ','), 0,1,'R');
 
 
 
