@@ -96,6 +96,7 @@
 
             $pdf = new FPDF('P','mm', array(80, 200));
             $pdf->AddPage();
+            $pdf->setMargins(5, 0, 0);
             $pdf->SetTitle('Reporte Compra');
             $pdf->SetFont('Arial','B',14);
             $pdf->Cell(65, 10, utf8_decode($empresa['nombre']), 0, 1,'C');
@@ -119,6 +120,16 @@
             $pdf->Cell(18, 5, utf8_decode('Folio:'), 0, 0,'L');
             $pdf->SetFont('Arial','',9);
             $pdf->Cell(20, 5, $id_compra, 0, 1,'L');
+            $pdf->Ln();
+
+            //Encabezado de productos
+            $pdf->Cell(10,5, 'Cant', 0,0, 'L');
+            $pdf->Cell(30,5, utf8_decode('Descripción'), 0,0, 'L');
+            $pdf->Cell(10,5, 'Precio', 0,0, 'L');
+            $pdf->Cell(10,5, 'Sub Total', 0,0, 'L');
+
+
+
             $pdf->Output();
         }
 
