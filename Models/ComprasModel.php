@@ -90,6 +90,11 @@
             }
             return $res;
         }
+        public function getEmpresa(){
+            $sql ="SELECT * FROM configuracion";
+            $data = $this->select($sql);
+            return $data;
+        }
         
 
      

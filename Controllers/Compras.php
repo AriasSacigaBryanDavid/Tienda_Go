@@ -87,13 +87,35 @@
             die();
         }
         public function generarPdf($id_compra){
+
+            $empresa = $this->model->getEmpresa();
             require('Libraries/fpdf/fpdf.php');
 
             $pdf = new FPDF('P','mm', array(80, 200));
             $pdf->AddPage();
             $pdf->SetTitle('Reporte Compra');
-            $pdf->SetFont('Arial','B',16);
-            $pdf->Cell(65,10, utf8_decode('Tienda Go'));
+            $pdf->SetFont('Arial','B',14);
+            $pdf->Cell(65, 10, utf8_decode($empresa['nombre']), 0, 1,'C');
+            $pdf->Image(base_url . 'Assets/img/logo.png', 55, 18, 20, 20);
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(18, 5, 'RUC: ', 0, 0,'L');
+            $pdf->SetFont('Arial','',9);
+            $pdf->Cell(20, 5,  $empresa['ruc'], 0, 1,'L');
+            
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(18, 5, utf8_decode('Teléfono: '), 0, 0,'L');
+            $pdf->SetFont('Arial','',9);
+            $pdf->Cell(20, 5, $empresa['telefono'], 0, 1,'L');
+
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(18, 5, utf8_decode('Dirección:'), 0, 0,'L');
+            $pdf->SetFont('Arial','',9);
+            $pdf->Cell(20, 5, utf8_decode($empresa['direccion']), 0, 1,'L');
+
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(18, 5, utf8_decode('Folio:'), 0, 0,'L');
+            $pdf->SetFont('Arial','',9);
+            $pdf->Cell(20, 5, $id_compra, 0, 1,'L');
             $pdf->Output();
         }
 
