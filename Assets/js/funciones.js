@@ -1300,14 +1300,17 @@ function generarCompra(){
             http.onreadystatechange=function(){
                 if(this.readyState == 4 && this.status ==200){
                     const res = JSON.parse(this.responseText);
-                    if (res == "ok" ){
+                    if (res.msg == "ok" ){
                         Swal.fire(
                             'Mensaje!',
                             'Compra generada.',
                             'success'
                         )
-                        const ruta =base_url + 'Compras/generarPdf/2';
+                        const ruta =base_url + 'Compras/generarPdf/'+ res.id_compra;
                         window.open(ruta);
+                        setTimeout(() =>{
+                            window.location.reload();
+                        },300);
                     }else{
                         Swal.fire(
                             'Mensaje!',
