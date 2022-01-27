@@ -149,6 +149,22 @@
             $pdf->Output();
         }
 
+        public function historial(){
+            $this->views->getView($this,"historial");
+        }
+        public function  listar_historial(){
+           $data=$this->model->getHistorialcompras();
+           for ($i=0; $i<count($data); $i++){
+            $data[$i]['acciones']='<div>
+               <a class="btn btn-danger" href="'.base_url."Compras/generarPdf/".$data[$i]['id'].'" target="_blank"><i class="fas fa-file-pdf"></i></a>
+               </div>';
+            
+        }
+           echo json_encode($data, JSON_UNESCAPED_UNICODE);
+           die();
+        }
+        
+
     }
 
 ?>

@@ -112,6 +112,12 @@
             $data = $this->selectAll($sql);
             return $data;
         }
+
+        public function getHistorialcompras(){
+            $sql= "SELECT * FROM compras";
+            $data= $this->selectAll($sql);
+            return $data;
+        }
         
 
      

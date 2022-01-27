@@ -97,6 +97,20 @@ document.addEventListener("DOMContentLoaded", function(){
             {'data' : 'acciones'}
         ]
     });
+    /** Inicio de historial de compra */
+    $('#t_historial_c').DataTable( {
+        ajax: {
+            url: base_url + "Compras/listar_historial" ,
+            dataSrc: ''
+        },
+        columns: [
+            {'data' : 'id'},
+            {'data' : 'total'},
+            {'data' : 'fecha'},
+            {'data' : 'acciones'}
+        ]
+    });
+    /** Fin de medidas */
 })
 
 function frmUsuario(){
