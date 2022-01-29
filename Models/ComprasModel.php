@@ -27,7 +27,7 @@
             return $res;
         }
         public function getDetalle(int $id){
-            $sql = "SELECT d.*, p.id AS id_pro, p.descripcion FROM detalle d INNER JOIN productos p ON d.id_producto =p.id  WHERE d.id_usuario =$id";
+            $sql = "SELECT d.*, p.id AS id_pro, p.descripcion FROM detalle d INNER JOIN productos p ON d.id_producto=p.id  WHERE d.id_usuario =$id";
             $data= $this-> selectAll($sql);
             return $data;
         }
@@ -108,8 +108,8 @@
            
         }
         public function getProCompra(int $id_compra){
-            $sql ="SELECT c.*, d.*, p.id, p.descripcion FROM compras c INNER JOIN detalle_compra d ON c.id = d.id_compra INNER JOIN productos p ON p.id = d.id_producto WHERE c.id =$id_compra";
-            $data = $this->selectAll($sql);
+            $sql="SELECT c.*, d.*, p.id, p.descripcion FROM compras c INNER JOIN detalle_compra d ON c.id = d.id_compra INNER JOIN productos p ON p.id = d.id_producto WHERE c.id =$id_compra";
+            $data= $this->selectAll($sql);
             return $data;
         }
 

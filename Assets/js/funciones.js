@@ -1251,12 +1251,10 @@ function cargaDetalle(){
                     <td>${row['precio']}</td>
                     <td>${row['sub_total']}</td>
                     <td>
-                        <button class="btn btn-danger" type=""button" onclick="deleteDetalle(${row['id']})">
+                        <button class="btn btn-danger" type="button" onclick="deleteDetalle(${row['id']})">
                         <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
-
-
                 </tr>`;
             }); 
             document.getElementById("tblDetalle").innerHTML = html; 
@@ -1320,7 +1318,7 @@ function generarCompra(){
                             'Compra generada.',
                             'success'
                         )
-                        const ruta =base_url + 'Compras/generarPdf/'+ res.id_compra;
+                        const ruta =base_url +'Compras/generarPdf/'+ res.id_compra;
                         window.open(ruta);
                         setTimeout(() =>{
                             window.location.reload();
