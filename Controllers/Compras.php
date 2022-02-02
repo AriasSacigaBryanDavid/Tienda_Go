@@ -141,8 +141,8 @@
                 $pdf->Cell(15,5, number_format($row['sub_total'], 2, '.',',') , 0,1, 'L');
             }
             $pdf->Ln();
-            $pdf->Cell(70, 5, 'Total a pagar', 0,1,'R');
-            $pdf->Cell(70, 5, number_format($total, 2, '.', ','), 0,1,'R');
+            $pdf->Cell(70, 5, 'Total a pagar', 0, 1,'R');
+            $pdf->Cell(70, 5, number_format($total, 2, '.', ','), 0, 1,'R');
 
 
 
@@ -150,9 +150,9 @@
         }
 
         public function historial(){
-            $this->views->getView($this,"historial");
+            $this->views->getView($this, "historial");
         }
-        public function  listar_historial(){
+        public function listar_historial(){
            $data=$this->model->getHistorialcompras();
            for ($i=0; $i<count($data); $i++){
             $data[$i]['acciones']='<div>
