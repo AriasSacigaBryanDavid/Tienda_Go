@@ -23,7 +23,7 @@
                }
                $data[$i]['acciones'] = '<div>
                     <button class="btn btn-primary" type="button" onclick="btnEditarProd('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
-                    <button class="btn btn-danger" type="button" onclick="btnEliminarProd('.$data[$i]['id'].');"><i class="fas fa-trash"></i></i></button>
+                    <button class="btn btn-danger" type="button" onclick="btnEliminarProd('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
                     <button class="btn btn-success" type="button" onclick="btnReingresarProd('.$data[$i]['id'].');"><i class="fas fa-recycle"></i></button>
                     </div>';
            }
