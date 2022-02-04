@@ -1337,6 +1337,48 @@ function generarCompra(){
       })   
 }
 
+function CancelarCompra(){
+    Swal.fire({
+        title: '¿Está seguro de cancelar la compra?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url =base_url + "Compras/cancelarCompra";
+            const http=new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange=function(){
+                if(this.readyState == 4 && this.status ==200){
+                    const res = JSON.parse(this.responseText);
+                    if (res.msg == "ok" ){
+                        Swal.fire(
+                            'Mensaje!',
+                            'Compra Cancelada.',
+                            'success'
+                        )
+                        
+                        setTimeout(() =>{
+                            window.location.reload();
+                        },300);
+                    }else{
+                        Swal.fire(
+                            'Mensaje!',
+                            res,
+                            'error'
+                        )
+                    }
+                }
+            }
+            
+        }
+      })   
+}
+
 /** Fin de compras*/
 /*******************************/
 

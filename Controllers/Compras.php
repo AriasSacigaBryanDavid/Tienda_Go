@@ -162,6 +162,17 @@
            echo json_encode($data, JSON_UNESCAPED_UNICODE);
            die();
         }
+        public function cancelarCompra(){
+            $id_usuario = $_SESSION['id_usuario'];
+            $id_compra = $this->model->id_compra();
+            $vaciar = $this->model->vaciarDetalle($id_usuario);
+            if($vaciar == 'ok'){
+                $msg =array('msg' => 'ok', 'id_compra' => $id_compra['id']);
+            
+            }
+            echo json_encode($msg);
+            die();
+        }
         
 
     }
