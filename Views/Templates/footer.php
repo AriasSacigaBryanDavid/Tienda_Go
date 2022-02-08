@@ -23,8 +23,8 @@
         <script src="<?php echo base_url; ?>Assets/demo/chart-area-demo.js"></script>
         <script src="<?php echo base_url; ?>Assets/demo/chart-bar-demo.js"></script>-->
 
-        <script src="<?php echo base_url; ?>Assets/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="<?php echo base_url; ?>Assets/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        
+        <script src="<?php echo base_url; ?>Assets/DataTables/datatables.min.js" crossorigin="anonymous"></script>
         <!-- 
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="<?php echo base_url; ?>Assets/demo/datatables-simple-demo.js"></script>-->

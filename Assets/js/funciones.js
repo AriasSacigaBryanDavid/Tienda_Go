@@ -95,7 +95,60 @@ document.addEventListener("DOMContentLoaded", function(){
             {'data' : 'cantidad'},
             {'data' : 'estado'},
             {'data' : 'acciones'}
-        ]
+        ],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                    //Botón para Excel
+                    extend: 'excelHtml5',
+                    footer: true,
+                    title: 'Archivo',
+                    filename: 'Export_File',
+     
+                    //Aquí es donde generas el botón personalizado
+                    text: '<span class="badge badge-success"><i class="fas fa-file-excel"></i></span>'
+                },
+                //Botón para PDF
+                {
+                    extend: 'pdfHtml5',
+                    download: 'open',
+                    footer: true,
+                    title: 'Reporte de Productos',
+                    filename: 'Reporte de Productos',
+                    text: '<span class="badge  badge-danger"><i class="fas fa-file-pdf"></i></span>',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                //Botón para copiar
+                {
+                    extend: 'copyHtml5',
+                    footer: true,
+                    title: 'Reporte de Productos',
+                    filename: 'Reporte de Productos',
+                    text: '<span class="badge  badge-primary"><i class="fas fa-copy"></i></span>',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                //Botón para print
+                {
+                    extend: 'print',
+                    footer: true,
+                    filename: 'Export_File_print',
+                    text: '<span class="badge badge-light"><i class="fas fa-print"></i></span>'
+                },
+                //Botón para ocultar
+                {
+                    extend: 'colvis',
+                    text: '<span class="badge  badge-info"><i class="fas fa-columns"></i></span>',
+                    postfixButtons: ['colvisRestore']
+                }
+            ]
     });
     /** Inicio de historial de compra */
     $('#t_historial_c').DataTable( {
