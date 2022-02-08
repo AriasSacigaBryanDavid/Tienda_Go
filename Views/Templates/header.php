@@ -51,6 +51,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<?php echo base_url;?>Usuarios"><i class="fas fa-user-cog"></i> Usuarios</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Cajas"> <i class="fas fa-cash-register"></i>Cajas</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion"><i class="fas fa-cogs"></i>Configuración</a>
                                 </nav>
                             </div>
                             <!-- menu de clientes -->

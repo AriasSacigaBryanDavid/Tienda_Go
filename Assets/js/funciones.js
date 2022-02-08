@@ -1233,7 +1233,9 @@ function calcularPrecio(e){
     }
     
 }
-cargaDetalle();
+if(document.getElementById('tblDetalle')){
+    cargaDetalle();
+}
 function cargaDetalle(){
     const url =base_url + "Compras/listar";
     const http=new XMLHttpRequest();
@@ -1381,6 +1383,33 @@ function CancelarCompra(){
 
 /** Fin de compras*/
 /*******************************/
-
+/** inicio de Administracion */
+function modificarEmpresa() {
+    const frm = document.getElementById('frmEmpresa');
+    const url =base_url + "Administracion/modificar";
+            const http=new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(new FormData(frm));
+            http.onreadystatechange=function(){
+                if(this.readyState == 4 && this.status ==200){
+                    const res = JSON.parse(this.responseText);
+                    if(res =='ok'){
+                        Swal.fire(
+                            'Mensaje!',
+                            'Modificado.',
+                            'success'
+                        )
+                    }else{
+                        Swal.fire(
+                            'Mensaje!',
+                            res,
+                            'error'
+                        )
+                    }
+                   
+                }
+            }
+}
+/** Fin de Administracion */
 
                      
