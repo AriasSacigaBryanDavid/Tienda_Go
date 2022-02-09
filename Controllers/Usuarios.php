@@ -64,27 +64,27 @@
             $id =$_POST['id'];
             $hash = hash("SHA256",$contrasena);
             if(empty($usuario) || empty($nombre) || empty($caja)){
-                $msg =" Todo los campos son obligatorios";
+                $msg =array('msg' =>'Todo los campos son obligatorio','icono'=>'warning');
             }else{
                 if ($id == ""){
                     if($contrasena != $confirmar){
-                        $msg =" las contraseña no coinciden";
+                        $msg =array('msg' =>'Las contraseña no coinciden','icono'=>'warning');
                     }else {
                         $data= $this->model->registrarUsuario($usuario,$nombre,$hash,$caja);
                         if ($data == "ok"){
-                            $msg = "si";  
+                            $msg =array('msg' =>'Usuario registrado con éxito','icono'=>'success');
                         }else if($data =="existe") {
-                            $msg = "El usuario ya existe";
+                            $msg =array('msg' =>'El usuario ya existe','icono'=>'warning');
                         }else {
-                            $msg="Error al registrar el usuario";
+                            $msg =array('msg' =>'Error al registrar el usuario','icono'=>'error');
                         }
                     }
                 }else {
                     $data= $this->model->modificarUsuario($usuario,$nombre,$caja, $id);
                         if ($data == "modificado"){
-                            $msg = "modificado";  
+                            $msg =array('msg' =>'Usuario modificado con éxito','icono'=>'success');
                         }else {
-                            $msg="Error al modificado el usuario";
+                            $msg =array('msg' =>'Error al modificado el usuario','icono'=>'error');
                         }
                 }
                 
@@ -100,9 +100,9 @@
         public function eliminar(int $id){
             $data = $this->model->accionUser(0, $id);
             if($data == 1){
-                $msg ="ok";
+                $msg =array('msg' =>'Usuario dado de baja','icono'=>'success');
             }else {
-                $msg ="Error al eliminar el usuario ";
+                $msg =array('msg' =>'Error al eliminar el usuario','icono'=>'error');
             }
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
@@ -110,9 +110,9 @@
         public function reingresar(int $id){
             $data = $this->model->accionUser(1, $id);
             if($data == 1){
-                $msg ="ok";
+                $msg =array('msg' =>'Usuario reingresado con éxito','icono'=>'success');
             }else {
-                $msg ="Error al reingresar el usuario ";
+                $msg =array('msg' =>'Error al reingresar el usuario','icono'=>'error');
             }
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();

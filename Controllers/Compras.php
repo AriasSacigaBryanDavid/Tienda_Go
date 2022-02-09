@@ -31,18 +31,18 @@
                 $sub_total= $precio * $cantidad;
                 $data= $this->model->registrarDetalle($id_producto,$id_usuario,$precio,$cantidad, $sub_total);
                     if($data == "ok"){
-                    $msg = "ok";
+                        $msg =array('msg' =>'Producto Ingresado a la Entrada','icono'=>'success');
                     }else{
-                    $msg = "Error al ingresar el producto";
+                        $msg =array('msg' =>'Error al ingresar el producto a la Entrada','icono'=>'error');
                     }
             }else{
                 $total_cantidad= $comprobar['cantidad'] + $cantidad;
                 $sub_total = $total_cantidad * $precio;
                 $data= $this->model->actualizarDetalle($precio, $total_cantidad, $sub_total, $id_producto, $id_usuario);
                     if($data == "modificado"){
-                    $msg = "modificado";
+                        $msg =array('msg' =>'Producto Actualizado','icono'=>'success');
                     }else{
-                    $msg = "Error al modificar el producto";
+                        $msg =array('msg' =>'Error al Actualizar el Producto','icono'=>'error');
                     }
             }
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);

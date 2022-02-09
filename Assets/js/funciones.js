@@ -179,17 +179,11 @@ function registrarUser(e){
     e.preventDefault();
     const usuario=document.getElementById("usuario");
     const nombre=document.getElementById("nombre");
-    const contrasena=document.getElementById("contrasena");
-    const confirmar=document.getElementById("confirmar");
+    //const contrasena=document.getElementById("contrasena");
+    //const confirmar=document.getElementById("confirmar");
     const caja=document.getElementById("caja");
     if(usuario.value == "" || nombre.value== "" || caja.value== "") {
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Porfavor ingrese los datos, es obligatorio',
-            showConfirmButton: false,
-            timer: 3000
-          })
+       alertas('Todo los campos son obligatorio', 'warning' );
     }else{
         const url =base_url + "Usuarios/registrar";
         const frm =document.getElementById("frmUsuario");
@@ -199,36 +193,9 @@ function registrarUser(e){
         http.onreadystatechange=function(){
             if(this.readyState == 4 && this.status ==200){
                const res = JSON.parse(this.responseText);
-               if(res == "si"){
-                  Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Usuario Registrado con éxito',
-                    showConfirmButton: false,
-                    timer: 3000
-                    })
-                  frm.reset();
-                  $("#nuevo_usuario").modal("hide");
-                  tblUsuarios.ajax.reload();
-               }else if(res == "modificado"){
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Usuario modificado con éxito',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                    $("#nuevo_usuario").modal("hide");
-                    tblUsuarios.ajax.reload();
-               }else{
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: res,
-                        showConfirmButton: false,
-                     timer: 3000
-                    })
-               }
+               $("#nuevo_usuario").modal("hide");
+               alertas(res.msg, res.icono);
+               tblUsuarios.ajax.reload();
                    
                 
             
@@ -278,20 +245,9 @@ function btnEliminarUser(id){
             http.onreadystatechange=function(){
                 if(this.readyState == 4 && this.status ==200){
                     const res = JSON.parse(this.responseText);
-                    if (res == "ok" ){
-                        Swal.fire(
-                            'Mensaje!',
-                            'Usuario eliminado con éxito.',
-                            'success'
-                        )
-                        tblUsuarios.ajax.reload();
-                    }else{
-                        Swal.fire(
-                            'Mensaje!',
-                            res,
-                            'error'
-                        )
-                    }
+                    alertas(res.msg, res.icono);
+                    tblUsuarios.ajax.reload();
+                    
                 }
             }
             
@@ -317,20 +273,9 @@ function btnReingresarUser(id){
             http.onreadystatechange=function(){
                 if(this.readyState == 4 && this.status ==200){
                     const res = JSON.parse(this.responseText);
-                    if (res == "ok" ){
-                        Swal.fire(
-                            'Mensaje!',
-                            'Usuario reingresado con éxito.',
-                            'success'
-                        )
-                        tblUsuarios.ajax.reload();
-                    }else{
-                        Swal.fire(
-                            'Mensaje!',
-                            res,
-                            'error'
-                        )
-                    }
+                    tblUsuarios.ajax.reload();
+                    alertas(res.msg, res.icono);
+                    
                 }
             }
             
@@ -1210,34 +1155,33 @@ function deleteImg(){
 /** inicio de compras */
 function buscarCodigo(e){
     e.preventDefault();
-    if(e.which == 13){
-        const cod = document.getElementById("codigo").value;
-        const url =base_url + "Compras/buscarCodigo/"+ cod;
-        const http=new XMLHttpRequest();
-        http.open("GET", url, true);
-        http.send();
-        http.onreadystatechange=function(){
-                if(this.readyState == 4 && this.status ==200){
-                    const res =JSON.parse(this.responseText);
-                    if(res){
-                        document.getElementById("nombre").value = res.descripcion;
-                        document.getElementById("precio").value = res.precio_compra;
-                        document.getElementById("id").value = res.id;
-                        document.getElementById("cantidad").focus();
-                    }else{
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: 'El Producto no existe',
-                            showConfirmButton: false,
-                         timer: 2000
-                        })
-                        document.getElementById("codigo").value='';
-                        document.getElementById("codigo").focus();
+    const cod = document.getElementById("codigo").value;
+    if (cod !='') {
+        if(e.which == 13){
+            const url =base_url + "Compras/buscarCodigo/"+ cod;
+            const http=new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange=function(){
+                    if(this.readyState == 4 && this.status ==200){
+                        const res =JSON.parse(this.responseText);
+                        if(res){
+                            document.getElementById("nombre").value = res.descripcion;
+                            document.getElementById("precio").value = res.precio_compra;
+                            document.getElementById("id").value = res.id;
+                            document.getElementById("cantidad").removeAttribute('disabled');
+                            document.getElementById("cantidad").focus();
+                        }else{
+                            alertas('El Producto no existe', 'warning');
+                            document.getElementById("codigo").value='';
+                            document.getElementById("codigo").focus();
+                        }
+            
                     }
-        
-                }
-        }
+            }
+        } 
+    }else{
+        alertas('Ingrese el Código de Barras ', 'warning');
     }
 }
 
@@ -1256,27 +1200,11 @@ function calcularPrecio(e){
             http.onreadystatechange=function(){
                 if(this.readyState == 4 && this.status ==200){
                     const res = JSON.parse(this.responseText);
-                    if(res == 'ok'){
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Producto Ingresado',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        frm.reset();
-                        cargaDetalle();
-                    }else if(res == 'modificado'){
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Producto Actualizado',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        frm.reset();
-                        cargaDetalle();
-                    }
+                    alertas(res.msg, res.icono);
+                    frm.reset();
+                    cargaDetalle();
+                    document.getElementById("cantidad").setAttribute('disabled', 'disabled');
+                    document.getElementById("codigo").focus();
                         
             
                 }
@@ -1464,5 +1392,14 @@ function modificarEmpresa() {
             }
 }
 /** Fin de Administracion */
+function alertas(mensaje, icono) {
+    Swal.fire({
+        position: 'top-end',
+        icon: icono,
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 3000
+    })
+}
 
                      
