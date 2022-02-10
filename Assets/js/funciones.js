@@ -174,7 +174,6 @@ function frmUsuario(){
     $("#nuevo_usuario").modal("show");
     document.getElementById("id").value ="";
 }
-
 function registrarUser(e){
     e.preventDefault();
     const usuario=document.getElementById("usuario");
@@ -203,7 +202,6 @@ function registrarUser(e){
         }
     }
 }
-
 function btnEditarUser(id){
     document.getElementById("title").innerHTML = "Actualizar usuario";
     document.getElementById("btnAccion").innerHTML = "Actualizar";
@@ -225,7 +223,6 @@ function btnEditarUser(id){
         }
     
 }
-
 function btnEliminarUser(id){
     Swal.fire({
         title: '¿Deseas Eliminar Usuario?',
@@ -254,7 +251,6 @@ function btnEliminarUser(id){
         }
       })
 }
-
 function btnReingresarUser(id){
     Swal.fire({
         title: '¿Está seguro de reingresar?',
@@ -458,7 +454,6 @@ function frmCliente(){
     $("#nuevo_cliente").modal("show");
     document.getElementById("id").value ="";
 }
-
 function registrarCli(e){
     e.preventDefault();
     const dni= document.getElementById("dni");
@@ -518,7 +513,6 @@ function registrarCli(e){
         }
     }
 }
-
 function btnEditarCli(id){
     document.getElementById("title").innerHTML ="Actualizar Cliente";
     document.getElementById("btnAccion").innerHTML="Actualizar";
@@ -541,7 +535,6 @@ function btnEditarCli(id){
 
     
 }
-
 function btnEliminarCli(id){
     Swal.fire({
         title: '¿Deseas Eliminar Cliente?',
@@ -580,7 +573,6 @@ function btnEliminarCli(id){
         }
       })
 }
-
 function btnReingresarCli(id){
     Swal.fire({
         title: '¿Está seguro de reingresar?',
@@ -628,7 +620,6 @@ function frmCategoria(){
     $("#nuevo_categoria").modal("show");
     document.getElementById("id").value ="";
 }
-
 function registrarCateg(e){
     e.preventDefault();
     const nombre = document.getElementById("nombre");
@@ -686,7 +677,6 @@ function registrarCateg(e){
 
         }
 }
-
 function btnEditarCateg(id){
     document.getElementById("title").innerHTML ="Actualizar Categoria";
     document.getElementById("btnAccion").innerHTML ="Actualizar";
@@ -704,7 +694,6 @@ function btnEditarCateg(id){
 
     }
 }
-
 function btnEliminarCateg(id){
     Swal.fire({
         title: '¿Deseas Eliminar Categoria?',
@@ -750,7 +739,6 @@ function btnEliminarCateg(id){
         
     })
 }
-
 function btnReingresarCateg(id){
     Swal.fire({
         title: '¿Está seguro de reingresar?',
@@ -856,7 +844,6 @@ function registrarMed(e){
 
         }
 }
-
 function btnEditarMed(id){
     document.getElementById("title").innerHTML ="Actualizar Cliente";
     document.getElementById("btnAccion").innerHTML="Actualizar";
@@ -874,7 +861,6 @@ function btnEditarMed(id){
         }
     }   
 }
-
 function btnEliminarMed(id){
     Swal.fire({
         title: '¿Deseas Eliminar medida?',
@@ -913,7 +899,6 @@ function btnEliminarMed(id){
         }
       })
 }
-
 function btnReingresarMed(id){
     Swal.fire({
         title: '¿Está seguro de reingresar?',
@@ -964,7 +949,6 @@ function frmProducto(){
     deleteImg();
 
 }
-
 function registrarProduc(e){
     e.preventDefault();
     const codigo =document.getElementById("codigo");
@@ -1026,7 +1010,6 @@ function registrarProduc(e){
     }
 
 }
-
 function btnEditarProd(id){
     document.getElementById("title").innerHTML ="Actualizar producto";
     document.getElementById("btnAccion").innerHTML = "Actualizar";
@@ -1054,7 +1037,6 @@ function btnEditarProd(id){
     }
     
 }
-
 function btnEliminarProd(id){
     Swal.fire({
         title: '¿Deseas Eliminar Producto?',
@@ -1094,7 +1076,6 @@ function btnEliminarProd(id){
         }
       })
 }
-
 function btnReingresarProd(id){
     Swal.fire({
         title: '¿Está seguro de reingresar?',
@@ -1142,7 +1123,6 @@ function preview(e){
     <button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button>
     ${url['name']}`;
 }
-
 function deleteImg(){
     document.getElementById("icon-cerrar").innerHTML=''; 
     document.getElementById("icon-image").classList.remove("d-none");
@@ -1185,6 +1165,37 @@ function buscarCodigo(e){
     }
 }
 
+function buscarCodigoVenta(e){
+    e.preventDefault();
+    const cod = document.getElementById("codigo").value;
+    if (cod !='') {
+        if(e.which == 13){
+            const url =base_url + "Compras/buscarCodigo/" + cod;
+            const http=new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange=function(){
+                    if(this.readyState == 4 && this.status ==200){
+                        const res =JSON.parse(this.responseText);
+                        if(res){
+                            document.getElementById("nombre").value = res.descripcion;
+                            document.getElementById("precio").value = res.precio_venta;
+                            document.getElementById("id").value = res.id;
+                            document.getElementById("cantidad").removeAttribute('disabled');
+                            document.getElementById("cantidad").focus();
+                        }else{
+                            alertas('El Producto no existe', 'warning');
+                            document.getElementById("codigo").value='';
+                            document.getElementById("codigo").focus();
+                        }
+            
+                    }
+            }
+        } 
+    }else{
+        alertas('Ingrese el Código de Barras ', 'warning');
+    }
+}
 function calcularPrecio(e){
     e.preventDefault();
     const cant = document.getElementById("cantidad").value;
@@ -1246,7 +1257,6 @@ function cargaDetalle(){
         }
     }
 }
-
 function deleteDetalle(id){
         const url =base_url + "Compras/delete/"+id;
         const http=new XMLHttpRequest();
@@ -1276,7 +1286,6 @@ function deleteDetalle(id){
             }
         }
 }
-
 function generarCompra(){
     Swal.fire({
         title: '¿Está seguro de realizar la compra?',
@@ -1319,7 +1328,6 @@ function generarCompra(){
         }
       })   
 }
-
 function CancelarCompra(){
     Swal.fire({
         title: '¿Está seguro de cancelar la compra?',
@@ -1361,7 +1369,6 @@ function CancelarCompra(){
         }
       })   
 }
-
 /** Fin de compras*/
 /*******************************/
 /** inicio de Administracion */
@@ -1392,6 +1399,8 @@ function modificarEmpresa() {
             }
 }
 /** Fin de Administracion */
+/*******************************/
+/** inicio de alertas */
 function alertas(mensaje, icono) {
     Swal.fire({
         position: 'top-end',
@@ -1401,5 +1410,9 @@ function alertas(mensaje, icono) {
         timer: 3000
     })
 }
+
+
+
+
 
                      

@@ -5,20 +5,22 @@
             session_start();
             parent::__construct();
         }
-        
         public function index(){
             if (empty($_SESSION['activo'])) {
                 header("location: ".base_url);
             }
             $this->views->getView($this,"index");
         }
-
+        public function ventas(){
+            $this->views->getView($this,"ventas");
+        }
         public function buscarCodigo($cod){
             $data =$this->model->getProCod($cod);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
 
         }
+        
         public function ingresar(){
             $id= $_POST['id'];
             $datos= $this->model->getProductos($id);
@@ -151,7 +153,6 @@
 
             $pdf->Output();
         }
-
         public function historial(){
             $this->views->getView($this, "historial");
         }
@@ -176,6 +177,8 @@
             echo json_encode($msg);
             die();
         }
+
+       
         
 
     }

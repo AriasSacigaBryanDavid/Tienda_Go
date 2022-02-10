@@ -2,17 +2,17 @@
     <div class="card">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h4>Nueva Compra</h4>
+                <h4>Nueva Venta</h4>
             </div>
         </div>
         <div class="card-body">
-            <form id="frmCompra">
+            <form id="frmVenta">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="codigo"><i class="fas fa-barcode"></i>Código de barras</label>
                             <input type="hidden" id="id" name="id">
-                            <input id="codigo" class="form-control" type="text" name="codigo" placeholder="Código de barras" onkeyup="buscarCodigo(event)">
+                            <input id="codigo" class="form-control" type="text" name="codigo" placeholder="Código de barras" onkeyup="buscarCodigoVenta(event)">
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -29,8 +29,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="precio">Precio de Compra </label>
-                            <input id="precio" class="form-control" type="text" name="precio" placeholder="Precio de Compra" disabled>
+                            <label for="precio">Precio de Venta </label>
+                            <input id="precio" class="form-control" type="text" name="precio" placeholder="Precio de Venta" disabled>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -62,17 +62,33 @@
         </tbody>
     </table>
     <div class="row">
-        <div class="col-md-4 ml-auto">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="cliente"><i class="fas fa-users"></i> Buscar Cliente</label>
+                <input id="cliente" class="form-control" type="text" name="cliente" placeholder="Nombre">
+                <input type="hidden" id="id" name="id">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                <input id="telefono" class="form-control" type="text" name="telefono" placeholder="Teléfono" disabled>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="direccion"><i class="fas fa-home"></i> Dirección</label>
+                <input id="direccion" class="form-control" type="text" name="direccion" placeholder="Dirección" disabled>
+            </div>
+        </div>
+        <div class="col-md-3">
                 <div class="form-group">
                 <label for="total" class="font-weight-bold">Total </label>
                 <input id="total" class="form-control" type="text" name="total" placeholder="Total" disabled>
-                <button class="btn btn-primary mt-2 btn-block" type="button" onclick="generarCompra()">Generar Compra</button>
-                <button class="btn btn-danger mt-2 btn-block" type="button" onclick="CancelarCompra()">Cancelar Compra</button>
+                <button class="btn btn-primary mt-2 btn-block" type="button" onclick="generarVenta()">Generar venta</button>
+                <button class="btn btn-danger mt-2 btn-block" type="button" onclick="CancelarVenta()">Cancelar Compra</button>
                 </div>
-            
-                
-
         </div>
+
     </div>
 <?php include "Views/Templates/footer.php";?>
-
