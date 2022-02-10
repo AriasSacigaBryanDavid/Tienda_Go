@@ -12,7 +12,7 @@
                         <div class="form-group">
                             <label for="codigo"><i class="fas fa-barcode"></i>Código de barras</label>
                             <input type="hidden" id="id" name="id">
-                            <input id="codigo" class="form-control" type="text" name="codigo" placeholder="Código de barras" onkeyup="buscarCodigoVenta(event)">
+                            <input id="codigo" class="form-control" type="text" name="codigo" placeholder="Código de barras" onkeyup="buscarCodigoV(event)">
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -86,7 +86,7 @@
                 <label for="total" class="font-weight-bold">Total </label>
                 <input id="total" class="form-control" type="text" name="total" placeholder="Total" disabled>
                 <button class="btn btn-primary mt-2 btn-block" type="button" onclick="generarVenta()">Generar venta</button>
-                <button class="btn btn-danger mt-2 btn-block" type="button" onclick="CancelarVenta()">Cancelar Compra</button>
+                <button class="btn btn-danger mt-2 btn-block" type="button" onclick="CancelarVenta()">Cancelar Venta</button>
                 </div>
         </div>
 

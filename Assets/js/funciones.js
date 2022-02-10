@@ -1165,7 +1165,7 @@ function buscarCodigo(e){
     }
 }
 
-function buscarCodigoVenta(e){
+function buscarCodigoV(e){
     e.preventDefault();
     const cod = document.getElementById("codigo").value;
     if (cod !='') {
