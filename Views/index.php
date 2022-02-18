@@ -18,15 +18,16 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Iniciar Sessión</h3></div>
+                                    <div class="card-header text-center">
+                                        <h3 class="font-weight-light my-4">Iniciar Sessión</h3>
+                                        <img src="Assets/img/logo.png" class="img-fluid rounded" alt="logo" width="200" >
+                                    
+                                    </div>
                                     <div class="card-body">
                                         
                                         <!-- Casilla para ingresar datos-->
                                         <form id="frmLogin">
-                                            <div class="form-floating mb-3" align="center">
-                                                <img src="Assets/img/logo.png" width="200" >
-                                            </div>
-                                        
+                                            
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Ingrese usuario" />
                                                 <label for="usuario"><i class="fas fa-user"></i> Usuario</label>
