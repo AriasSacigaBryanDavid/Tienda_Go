@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+a{
+    font-family: 'Patrick Hand', cursive;
+}
+.card-header-a{
+	background:   #138d75; 
+}
+.btn-a{
+    background:   #138d75; 
+}
+.card-header-d{
+	background: #283747; 
+}
+.navbar-d{
+    background: #283747; 
+}
+.table-a{
+    background:   #138d75; 
+}
+.fondo-a{
+    background: #283747;
+}
+.btn-b{
+    background: #283747; 
+}
+.btn-c{
+    background: #A93226; 
+}

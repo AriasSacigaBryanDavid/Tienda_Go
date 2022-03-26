@@ -1,30 +1,32 @@
 <?php include "Views/Templates/header.php";?>
-    <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Usuarios</li>
-    </ol>
-    <button class="btn btn-primary mb-2" type="button" onclick="frmUsuario();" ><i class="fas fa-user-plus"></i></button>
-    <table class="table table-dark table-hover" id="tblUsuarios">
-        <thead class="thead-dark">
-            <tr>
-                <th>Id</th>
-                <th>Usuarios</th>
-                <th>Nombre</th>
-                <th>Caja</th>
-                <th>Estado</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+
+    <div class="card-header card-header-a mb-2 text-white d-flex justify-content-between">
+        <h4>USUARIOS</h4>
+        <!--button de agregar usuario-->
+        <button class="btn btn-a mb-2" type="button" onclick="frmUsuario();" ><i class="fas fa-user-plus text-white"></i></button>
+    </div>
+    <div class="table-responsive text-white">
+        <table class="table table-a table-hover text-white" id="tblUsuarios">
+            <thead class="table-a text-white">
+                <tr>
+                    <th>Id</th>
+                    <th>Usuarios</th>
+                    <th>Nombre</th>
+                    <th>Caja</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <div id="nuevo_usuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-dark">
+                <div class="modal-header card-header-a">
                     <h5 class="modal-title text-white" id="title">Nuevo Usuario</h5>
-                    <button type="button"    class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close">
-                        <!--<span aria-hidden="true">&times;</span>-->
-                    </button>
+                    <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                     <form method="post" id="frmUsuario">
@@ -59,8 +61,8 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <button class="btn btn-primary" type="button" onclick="registrarUser(event);" id="btnAccion">Registrar</button>
-                        <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-outline-primary" type="button" onclick="registrarUser(event);" id="btnAccion">Registrar</button>
+                        <button class="btn btn-outline-danger" type="button" data-bs-dismiss="modal">Cancelar</button>
 
                     </form>
                 </div>

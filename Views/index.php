@@ -8,23 +8,27 @@
         <meta name="author" content="" />
         <title>Iniciar Sessión</title>
         <link href="<?php echo base_url; ?>Assets/css/styles.css" rel="stylesheet" />
+        <link href="<?php echo base_url; ?>Assets/css/temas.css" rel="stylesheet" />
         <script src="<?php echo base_url; ?>Assets/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
+    <body class="fondo-a">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header text-center">
+                                <div class="card card-header-a shadow-lg border-0 rounded-lg mt-5">
+                                    <!-- <div class="card-header text-center">
                                         <h3 class="font-weight-light my-4">Iniciar Sessión</h3>
                                         <img src="Assets/img/logo.png" class="img-fluid rounded" alt="logo" width="200" >
                                     
-                                    </div>
+                                    </div> -->
                                     <div class="card-body">
-                                        
+                                        <div class="text-center mb-2">
+                                            <img src="Assets/img/logo.png" class="img-fluid rounded mb-4" alt="logo" width="200">
+                                            <h3 class="font-weight-light text-white">Iniciar Sesión</h3>
+                                        </div>
                                         <!-- Casilla para ingresar datos-->
                                         <form id="frmLogin">
                                             
@@ -34,13 +38,13 @@
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="contrasena" name="contrasena" type="password" placeholder="Ingrese contraseña" />
-                                                <label for="contrasena"><i class="fas fa-key"></i>Contraseña</label>
+                                                <label for="contrasena"><i class="fas fa-key"></i> Contraseña</label>
                                             </div>
                                             <div class="alert alert-danger text-center d-none" id="alerta" role="alert">
                                                
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" type="submit" onclick="frmLogin(event);">Login</button>
+                                                <button class="btn btn-b text-white" type="submit" onclick="frmLogin(event);">Login</button>
                                             
                                             </div>
                                         </form>

@@ -10,10 +10,11 @@
         <link href="<?php echo base_url; ?>Assets/css/style.css" rel="stylesheet" />
         <link href="<?php echo base_url; ?>Assets/css/styles.css" rel="stylesheet" />
         <link href="<?php echo base_url; ?>Assets/DataTables/datatables.min.css" rel="stylesheet" crossorigin="anonymous"/>
+        <link href="<?php echo base_url; ?>Assets/css/temas.css" rel="stylesheet" />
         <script src="<?php echo base_url; ?>Assets/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <body class="sb-nav-fixed card-header-d">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark card-header-d">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">Tienda GO</a>
            
@@ -35,10 +36,10 @@
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                    <div class="form-floating mb-3" align="center">
-                                                <img src="Assets/img/logo.png" width="100" >
-                            </div>
+                    <div class="sb-sidenav-menu card-header-d">
+                        <!-- <div class="form-floating mb-3" align="center">
+                            <img src="Assets/img/logo.png" width="100" >
+                        </div> -->
                         <div class="nav">
                             <!-- menu de configuracion-->
                            
