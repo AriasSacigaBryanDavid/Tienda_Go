@@ -9,7 +9,9 @@
             if (empty($_SESSION['activo'])) {
                 header("location: ".base_url);
             }
-            $data['cajas'] = $this->model->getCajas();
+            $data['cargos'] = $this->model->getCargos();
+            $data['almacenes'] = $this->model->getAlmacenes();
+            $data['identidades'] = $this->model->getIdentidades();
             $this->views->getView($this,"index", $data);
         }
         public function listar(){

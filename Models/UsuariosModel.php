@@ -9,8 +9,18 @@
             $data = $this->select($sql);
             return $data;
         }
-        public function getCajas(){
-            $sql = "SELECT * FROM caja WHERE estado=1";
+        public function getCargos(){
+            $sql = "SELECT * FROM cargos WHERE estado=1";
+            $data = $this->selectAll($sql);
+            return $data;
+        }
+        public function getAlmacenes(){
+            $sql = "SELECT * FROM almacenes WHERE estado=1";
+            $data = $this->selectAll($sql);
+            return $data;
+        }
+        public function getIdentidades(){
+            $sql = "SELECT * FROM identidades WHERE estado=1";
             $data = $this->selectAll($sql);
             return $data;
         }
