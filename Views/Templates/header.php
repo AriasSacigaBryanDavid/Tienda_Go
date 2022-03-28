@@ -41,7 +41,7 @@
                             <img src="Assets/img/logo.png" width="100" >
                         </div> -->
                         <div class="nav">
-                            <!-- menu de configuracion-->
+                            <!-- menu de Administración-->
                            
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tools text-success fa-2x"></i></div>
@@ -53,6 +53,19 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Usuarios"><i class="fas fa-user-cog"></i> Usuarios</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Cajas"> <i class="fas fa-cash-register"></i>Cajas</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Administracion"><i class="fas fa-cogs"></i>Configuración</a>
+                                </nav>
+                            </div>
+
+                            <!-- menu de configuracion-->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tools text-success fa-2x"></i></div>
+                                Configuracion
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?php echo base_url;?>Configuraciones"><i class="fas fa-user-cog"></i> configuración</a>
+                                    
                                 </nav>
                             </div>
                             <!-- menu de clientes -->
