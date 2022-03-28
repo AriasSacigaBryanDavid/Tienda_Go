@@ -11,8 +11,14 @@ document.addEventListener("DOMContentLoaded", function(){
         columns: [
             {'data' : 'id'},
             {'data' : 'usuario'},
+            {'data' : 'cargo'},
+            {'data' : 'almacen'},
             {'data' : 'nombre'},
-            {'data' : 'caja'},
+            {'data' : 'identidad'},
+            {'data' : 'n_identidad'},
+            {'data' : 'telefono'},
+            {'data' : 'correo'},
+            {'data' : 'direccion'},
             {'data' : 'estado'},
             {'data' : 'acciones'}
         ]
@@ -177,12 +183,19 @@ function frmUsuario(){
 function registrarUser(e){
     e.preventDefault();
     const usuario=document.getElementById("usuario");
-    const nombre=document.getElementById("nombre");
     //const contrasena=document.getElementById("contrasena");
     //const confirmar=document.getElementById("confirmar");
-    const caja=document.getElementById("caja");
-    if(usuario.value == "" || nombre.value== "" || caja.value== "") {
-       alertas('Todo los campos son obligatorio', 'warning' );
+    const cargo=document.getElementById("cargo");
+    const almacen=document.getElementById("almacen");
+    const nombre=document.getElementById("nombre");
+    const identidad=document.getElementById("identidad");
+    const n_identidad=document.getElementById("n_identidad");
+    const telefono=document.getElementById("telefono");
+    const correo=document.getElementById("correo");
+    const direccion=document.getElementById("direccion");
+
+    if(usuario.value == "" || cargo.value == "" || almacen.value == "" || nombre.value == "" || identidad.value == "" || n_identidad.value == "" || telefono.value == "" || correo.value == "" || direccion.value == "") {
+       alertas('Todo los campos son obligatorios', 'warning' );
     }else{
         const url =base_url + "Usuarios/registrar";
         const frm =document.getElementById("frmUsuario");
@@ -214,8 +227,15 @@ function btnEditarUser(id){
                const res = JSON.parse(this.responseText);
                document.getElementById("id").value = res.id;
                document.getElementById("usuario").value = res.usuario;
+               document.getElementById("cargo").value = res.id_cargo;
+               document.getElementById("almacen").value = res.id_almacen;
                document.getElementById("nombre").value = res.nombre;
-               document.getElementById("caja").value = res.id_caja;
+               document.getElementById("identidad").value = res.id_identidad;
+               document.getElementById("n_identidad").value = res.n_identidad;
+               document.getElementById("telefono").value = res.telefono;
+               document.getElementById("correo").value = res.correo;
+               document.getElementById("direccion").value = res.direccion;
+
                document.getElementById("contrasenas").classList.add("d-none");
                $("#nuevo_usuario").modal("show");
 

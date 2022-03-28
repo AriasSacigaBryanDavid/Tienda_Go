@@ -59,20 +59,26 @@
         }
         public function registrar(){
             $usuario =$_POST['usuario'];
-            $nombre =$_POST['nombre'];
             $contrasena =$_POST['contrasena'];
             $confirmar =$_POST['confirmar'];
-            $caja =$_POST['caja'];
+            $cargo =$_POST['cargo'];
+            $almacen =$_POST['almacen'];
+            $nombre =$_POST['nombre'];
+            $identidad =$_POST['identidad'];
+            $n_identidad =$_POST['n_identidad'];
+            $telefono =$_POST['telefono'];
+            $correo =$_POST['correo'];
+            $direccion =$_POST['direccion'];
             $id =$_POST['id'];
             $hash = hash("SHA256",$contrasena);
-            if(empty($usuario) || empty($nombre) || empty($caja)){
-                $msg =array('msg' =>'Todo los campos son obligatorio','icono'=>'warning');
+            if(empty($usuario) || empty($cargo) || empty($almacen) || empty($nombre) || empty($identidad) || empty($n_identidad) || empty($telefono) || empty($correo) || empty($direccion)){
+                $msg =array('msg' =>'Todo los campos son obligatorios','icono'=>'warning');
             }else{
                 if ($id == ""){
                     if($contrasena != $confirmar){
-                        $msg =array('msg' =>'Las contraseña no coinciden','icono'=>'warning');
+                        $msg =array('msg' =>'Las contraseñas no coinciden','icono'=>'warning');
                     }else {
-                        $data= $this->model->registrarUsuario($usuario,$nombre,$hash,$caja);
+                        $data= $this->model->registrarUsuario($usuario,$hash,$cargo,$almacen,$nombre,$identidad,$n_identidad,$telefono,$correo,$direccion);
                         if ($data == "ok"){
                             $msg =array('msg' =>'Usuario registrado con éxito','icono'=>'success');
                         }else if($data =="existe") {
@@ -82,7 +88,7 @@
                         }
                     }
                 }else {
-                    $data= $this->model->modificarUsuario($usuario,$nombre,$caja, $id);
+                    $data= $this->model->modificarUsuario($usuario,$cargo,$almacen,$nombre,$identidad,$n_identidad,$telefono,$correo,$direccion, $id);
                         if ($data == "modificado"){
                             $msg =array('msg' =>'Usuario modificado con éxito','icono'=>'success');
                         }else {

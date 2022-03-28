@@ -10,9 +10,15 @@
             <thead class="table-a text-white">
                 <tr>
                     <th>Id</th>
-                    <th>Usuarios</th>
+                    <th>Usuario</th>
+                    <th>Cargo</th>
+                    <th>Almacén</th>
                     <th>Nombre</th>
-                    <th>Caja</th>
+                    <th>Documento de Identidad</th>
+                    <th>Número de Identidad</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
                     <th>Estado</th>
                     <th></th>
                 </tr>
