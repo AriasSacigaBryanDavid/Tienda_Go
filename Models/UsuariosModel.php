@@ -9,6 +9,11 @@
             $data = $this->select($sql);
             return $data;
         }
+        public function getUsuario_home($id_usuario){
+            $sql = "SELECT * FROM usuarios WHERE id=$id_usuario";
+            $data = $this->select($sql);
+            return $data;
+        }
         public function getCargos(){
             $sql = "SELECT * FROM cargos WHERE estado=1";
             $data = $this->selectAll($sql);

@@ -113,8 +113,11 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Conectado como:</div>
-                        Tienda GO
+                        <!-- <div class="small">Conectado como:</div>
+                        Tienda GO -->
+                        <div class="form-group">
+                            <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre" value="<?php echo $data['usuarios'] ?>" disabled>
+                        </div>
                     </div>
                 </nav>
             </div>
