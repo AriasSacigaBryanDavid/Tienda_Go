@@ -74,7 +74,7 @@
             $this->direccion =$direccion;
             $this->id = $id;
             $sql ="UPDATE usuarios SET usuario =?, id_cargo = ?, id_almacen=?, nombre=?, id_identidad=?, n_identidad=?, telefono=?, correo=?, direccion=? WHERE id=?";
-            $datos = array($this->usuario, $this->id_cargo, $this->id_almacen,$this->nombre, $this->id_identidad, $this->n_identidad, $this->telefono, $this->correo, $this->direccion, $this->id);
+            $datos = array($this->usuario, $this->id_cargo, $this->id_almacen, $this->nombre, $this->id_identidad, $this->n_identidad, $this->telefono, $this->correo, $this->direccion, $this->id);
             $data =$this->save($sql, $datos);
             if($data ==1){
                     $res= "modificado";
