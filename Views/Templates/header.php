@@ -64,8 +64,8 @@
                             </a>
                             <div class="collapse" id="collapseConfiguracion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?php echo base_url;?>Configuraciones"><i class="fas fa-user-cog"></i> configuración</a>
-                                    
+                                    <a class="nav-link" href="<?php echo base_url;?>Configuraciones">configuración</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Configuraciones/cargos">Cargos</a>
                                 </nav>
                             </div>
                             <!-- menu de clientes -->
