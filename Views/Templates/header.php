@@ -53,11 +53,12 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Usuarios"><i class="fas fa-user-cog"></i> Usuarios</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Cajas"> <i class="fas fa-cash-register"></i>Cajas</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Administracion"><i class="fas fa-cogs"></i>Configuración</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/cargos"><i class="fas fa-cogs"></i>Cargos</a>
                                 </nav>
                             </div>
 
                             <!-- menu de configuracion-->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseConfiguracion" aria-expanded="false" aria-controls="collapseConfiguracion">
+                            <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseConfiguracion" aria-expanded="false" aria-controls="collapseConfiguracion">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tools text-success fa-2x"></i></div>
                                 Configuracion
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
@@ -67,7 +68,7 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Configuraciones">configuración</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Configuraciones/cargos">Cargos</a>
                                 </nav>
-                            </div>
+                            </div> -->
                             <!-- menu de clientes -->
                             <a class="nav-link" href="<?php echo base_url; ?>Clientes" >
                                 <div class="sb-nav-link-icon"><i class="fas fa-users text-success fa-2x"></i></div>
@@ -113,9 +114,8 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small" value="<?php echo $data['usuarios']?>">Conectado como:</div>
-                        <!-- <input id="nombre_cuenta" class="form-control" type="text" name="nombre_cuenta" placeholder="Nombre" value="<?php echo $data['usuarios']?>" disabled> -->
-                        <!-- </div> -->
+                        <div class="small">Conectado como:</div>
+                        Tienda Go
                     </div>
                 </nav>
             </div>

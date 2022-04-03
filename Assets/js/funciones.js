@@ -1,5 +1,4 @@
-
-let tblUsuarios,tblCajas ,tblClientes,tblCategorias,tblMedidas,tblProductos;
+let tblUsuarios,tblCajas ,tblClientes,tblCategorias,tblMedidas,tblProductos,tblCargos;
 
 /** Inicio de Usuario */
 document.addEventListener("DOMContentLoaded", function(){
@@ -77,6 +76,26 @@ document.addEventListener("DOMContentLoaded", function(){
             ]
     } );
     /** Fin de la tabla usuarios*/ 
+    /** Inicio de cargos */
+    tblCargos = $('#tblCargos').DataTable( {
+        ajax: {
+            url: base_url + "Administracion/listar_cargos" ,
+            dataSrc: ''
+        },
+        columns: [
+            {'data' : 'id'},
+            {'data' : 'nombre'},
+            {'data' : 'estado'},
+            {'data' : 'acciones'}
+        ],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+    });
+     /** Fin de la tabla cargos*/
      /** Inicio de cajas */
      tblCajas = $('#tblCajas').DataTable( {
         ajax: {
@@ -351,6 +370,105 @@ function btnReingresarUser(id){
       })
 }
 /** Fin de Usuario */
+/*******************************/
+/** inicio de cargo */
+function frmCargo(){
+    document.getElementById("title").innerHTML ="Agregar Cargo";
+    document.getElementById("btnAccion").innerHTML ="Agregar";
+    document.getElementById("frmCargo").reset();
+    $("#nuevo_cargo").modal("show");
+    document.getElementById("id").value ="";
+}
+function registrarCar(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    if( nombre.value=="" ){
+        alertas('Todo los campos son obligatorios', 'warning');
+    }else{
+        const url = base_url +"Administracion/registrar_cargo";
+        const frm = document.getElementById("frmCargo");
+        const http = new XMLHttpRequest();
+        http.open("POST",url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                const res= JSON.parse(this.responseText);
+                $("#nuevo_cargo").modal("hide");
+                alertas(res.msg, res.icono);
+                tblCargos.ajax.reload();
+            }    
+        }
+    }
+}
+function btnEditarCar(id){
+    document.getElementById("title").innerHTML ="Actualizar Cargo";
+    document.getElementById("btnAccion").innerHTML ="Actualizar";
+    const url = base_url +"Administracion/editar_cargo/"+id;
+    const http = new XMLHttpRequest();
+    http.open("GET",url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            const res = JSON.parse(this.responseText); 
+            document.getElementById("id").value =res.id;
+            document.getElementById("nombre").value=res.nombre; 
+            $("#nuevo_cargo").modal("show");  
+        }
+
+    }
+}
+function btnEliminarCar(id){
+    Swal.fire({
+        title: '¿Deseas Eliminar Cargo?',
+        text: "¡El cargo no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/eliminar_cargo/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res=JSON.parse(this.responseText);
+                  alertas(res.msg, res.icono);
+                  tblCargos.ajax.reload();  
+                }
+            }
+        }
+    })
+}
+function btnReingresarCar(id){
+    Swal.fire({
+        title: '¿Está seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/reingresar_cargo/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  tblCargos.ajax.reload();
+                  alertas(res.msg, res.icono);   
+                }
+            }
+        }
+      })
+}
+/** Fin de cargos */
 /*******************************/
 /** inicio de caja */
 function frmCaja(){

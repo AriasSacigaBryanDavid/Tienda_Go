@@ -13,7 +13,6 @@
             $data['cargos'] = $this->model->getCargos();
             $data['almacenes'] = $this->model->getAlmacenes();
             $data['identidades'] = $this->model->getIdentidades();
-            $data['usuarios'] = $this->model->getUsuario_home($id_usuario);
             $this->views->getView($this,"index", $data);
         }
         public function listar(){
