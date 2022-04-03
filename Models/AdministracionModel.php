@@ -4,13 +4,13 @@
     public function __construct(){
             parent::__construct();
     }
+     // Inicio de Configuracion de Empresa
     public function getEmpresa(){
         $sql = "SELECT * FROM configuracion";
         $data = $this->select($sql);
         return $data;
     }
-    public function modificar(String $nombre, string $ruc, string $telefono, string $direccion, string $mensaje, int $id ){
-        
+    public function modificar(String $nombre, string $ruc, string $telefono, string $direccion, string $mensaje, int $id ){ 
         $sql="UPDATE configuracion SET nombre=?,ruc=?, telefono=?, direccion=?, mensaje=? WHERE id=?";
         $datos= array($nombre, $ruc, $telefono, $direccion, $mensaje, $id);
         $data=$this->save($sql, $datos);
@@ -21,6 +21,7 @@
         }
         return $res;
     }
+    // Inicio de Cargos
     public function getCargos(){
         $sql="SELECT * FROM cargos";
         $data= $this->selectAll($sql);
@@ -63,7 +64,6 @@
         $data = $this->select($sql);
         return $data;
     }
-    
     public function accionCargo(int $estado, int $id){
         $this->id=$id;
         $this->estado=$estado;
@@ -72,8 +72,17 @@
         $data = $this->save($sql, $datos);
         return $data;
     }
-    
-
+    // Inicio de Almacenes
+    public function getUsuarios(){
+        $sql = "SELECT * FROM usuarios WHERE estado=1";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
+    public function getAlmacenes(){
+        $sql="SELECT a.*, u.id AS id_usuario, u.nombre AS encargado FROM almacenes a INNER JOIN usuarios u ON a.id_usuario = a.id";
+        $data= $this->selectAll($sql);
+        return $data;
+    }
 
     }
     

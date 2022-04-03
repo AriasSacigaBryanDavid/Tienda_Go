@@ -54,6 +54,7 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Cajas"> <i class="fas fa-cash-register"></i>Cajas</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Administracion"><i class="fas fa-cogs"></i>Configuración</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Administracion/cargos"><i class="fas fa-cogs"></i>Cargos</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/almacenes"><i class="fas fa-cogs"></i>Almacenes</a>
                                 </nav>
                             </div>
 

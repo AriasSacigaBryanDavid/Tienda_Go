@@ -14,6 +14,7 @@
             $data= $this->model->getEmpresa();
             $this->views->getView($this,"index",$data);
         }
+        // Inicio de Configuracion de Empresa
         public function modificar()
         {
             $nombre = $_POST['nombre'];
@@ -32,7 +33,7 @@
             die();
         }
 
-        //Cargos
+        // Inicio de Cargos
         public function cargos(){
             $this->views->getView($this,"cargos");
         }
@@ -105,6 +106,32 @@
                 $msg =array('msg' =>'Error al reingresar el cargo','icono'=>'error');
             }
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        // Inicio de Almacenes
+        public function almacenes(){
+            $data['usuarios']=$this->model->getUsuarios();
+            $this->views->getView($this,"almacenes",$data);
+        }
+
+        public function listar_almacenes(){
+            $data = $this->model->getAlmacenes();
+            for ($i =0; $i<count($data); $i++){
+                if($data[$i]['estado']== 1){
+                    $data[$i]['estado']= '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
+                    $data[$i]['acciones']='<div>
+                    <button class="btn btn-primary mb-2" type="button" onclick="btnEditarAlm('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-danger" type="button" onclick="btnEliminarAlm('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
+                    </div>';
+                }else {
+                    $data[$i]['estado'] ='<span class="p-1 mb-2 bg-danger text-white rounded">Inactivo</span>';
+                    $data[$i]['acciones']='<div>
+                    <button class="btn btn-success" type="button" onclick="btnReingresarAlm('.$data[$i]['id'].');"><i class="fas fa-recycle"></i></button>
+                    </div>';
+                }
+                
+            }
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
         }
     }
