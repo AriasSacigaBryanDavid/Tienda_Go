@@ -107,6 +107,8 @@ document.addEventListener("DOMContentLoaded", function(){
             {'data' : 'nombre'},
             {'data' : 'direccion'},
             {'data' : 'encargado'},
+            {'data' : 'telefono'},
+            {'data' : 'correo'},
             {'data' : 'estado'},
             {'data' : 'acciones'}
         ],

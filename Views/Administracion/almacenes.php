@@ -1,6 +1,5 @@
 <?php include "Views/Templates/header.php";?>
     
-
     <div class="card-header card-header-a mb-2 text-white d-flex justify-content-between">
         <h4>ALMACENES</h4>
         <!--button de agregar almacen-->
@@ -16,6 +15,8 @@
                     <th>Nombre</th>
                     <th>Direccion</th>
                     <th>Encargado</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
                     <th>Estado</th>
                     <th></th>
                 </tr>
@@ -48,14 +49,18 @@
                             <label for="direccion">Dirección</label>
                             <textarea id="direccion" class="form-control" name="direccion" placeholder="Dirección" rows="3"></textarea>
                         </div>  
-                        <div class="form-group" > 
-                            <label for="usuario">Encargado</label>
-                                <select id="usuario" class="form-control" name="usuario">
-                                    <?php foreach ($data['usuarios'] as $row) { ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
-                                    <?php } ?>
-                                </select>
-                        </div>    
+                        <div class="form-group">
+                            <label for="encargado">Encargado</label>
+                            <input id="encargado" class="form-control" type="text" name="encargado" placeholder="Encargado de Almacén">
+                        </div>     
+                        <div class="form-group mb-2">
+                            <label for="telefono">Teléfono</label>
+                            <input id="telefono" class="form-control" type="text" name="telefono" placeholder="Teléfono">
+                        </div>  
+                        <div class="form-group mb-3">
+                            <label for="correo">Correo</label>
+                            <input id="correo" class="form-control" type="text" name="correo" placeholder="Correo">
+                        </div>
                         <button class="btn btn-b text-white" type="button" onclick="registrarAlm(event);" id="btnAccion">Agregar</button>
                         <button class="btn btn-c text-white" type="button" data-bs-dismiss="modal">Cancelar</button>         
                     </form>

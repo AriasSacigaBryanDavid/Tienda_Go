@@ -79,7 +79,7 @@
         return $data;
     }
     public function getAlmacenes(){
-        $sql="SELECT a.*, u.id AS id_usuario, u.nombre AS encargado FROM almacenes a INNER JOIN usuarios u ON a.id_usuario = a.id";
+        $sql="SELECT * FROM almacenes";
         $data= $this->selectAll($sql);
         return $data;
     }
