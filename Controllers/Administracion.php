@@ -187,5 +187,159 @@
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
         }
+
+        // Inicio de Identidades
+        public function identidades(){
+            $this->views->getView($this,"identidades");
+        }
+        public function listar_identidades(){
+            $data = $this->model->getIdentidades();
+            for ($i =0; $i<count($data); $i++){
+                if($data[$i]['estado'] ==1){
+                    $data[$i]['estado'] = '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
+                    $data[$i]['acciones']='<div>
+                    <button class="btn btn-primary mb-2" type="button" onclick="btnEditarIden('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-danger" type="button" onclick="btnEliminarIden('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
+                    </div>';
+                }else {
+                    $data[$i]['estado'] ='<span class="p-1 mb-2 bg-danger text-white rounded">Inactivo</span>';
+                    $data[$i]['acciones']='<div>
+                    <button class="btn btn-success" type="button" onclick="btnReingresarIden('.$data[$i]['id'].');"><i class="fas fa-recycle"></i></button>
+                    </div>';
+                }     
+            }
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function registrar_identidad(){
+            $nombre=$_POST['nombre'];
+            $id=$_POST['id'];
+            if(empty($nombre)){
+                $msg =array('msg' =>'Todo los campos son obligatorios','icono'=>'warning');
+            }else{
+                if ($id== "") {
+                    $data=$this->model->registrarIdentidad($nombre);
+                    if($data == "ok") {
+                        $msg =array('msg' =>'Identidad registrado con éxito','icono'=>'success');
+                    }else if($data == "existe"){ 
+                        $msg =array('msg' =>'La identidad ya éxiste','icono'=>'warning');
+                    } else {
+                        $msg =array('msg' =>'Error al registrar la identidad','icono'=>'error');
+                    }
+                }else {
+                    $data=$this->model->modificarIdentidad($nombre,$id);
+                    if($data == "modificado") {
+                        $msg =array('msg' =>'Identidad modificado con éxito','icono'=>'success');
+                    }else {
+                        $msg =array('msg' =>'Error al modificado la identidad','icono'=>'error');
+                    } 
+                }   
+            }
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function editar_identidad(int $id){
+            $data = $this->model->editarIdentidad($id);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function eliminar_identidad(int $id){
+            $data = $this->model->accionIdentidad(0, $id);
+            if($data ==1){
+                $msg =array('msg' =>'Identidad dado de baja','icono'=>'success');
+            }else {
+                $msg =array('msg' =>'Error al eliminar la identidad','icono'=>'error');
+            }
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function reingresar_identidad(int $id){
+            $data = $this->model->accionIdentidad(1,$id);
+            if($data ==1){
+                $msg =array('msg' =>'Identidad reingresado con éxito','icono'=>'success');
+            }else {
+                $msg =array('msg' =>'Error al reingresar la identidad','icono'=>'error');
+            }
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        // Inicio de Documentos
+        public function documentos(){
+            $this->views->getView($this,"documentos");
+        }
+        public function listar_documentos(){
+            $data = $this->model->getDocumentos();
+            for ($i =0; $i<count($data); $i++){
+                if($data[$i]['estado'] ==1){
+                    $data[$i]['estado'] = '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
+                    $data[$i]['acciones']='<div>
+                    <button class="btn btn-primary mb-2" type="button" onclick="btnEditarDoc('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-danger" type="button" onclick="btnEliminarDoc('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
+                    </div>';
+                }else {
+                    $data[$i]['estado'] ='<span class="p-1 mb-2 bg-danger text-white rounded">Inactivo</span>';
+                    $data[$i]['acciones']='<div>
+                    <button class="btn btn-success" type="button" onclick="btnReingresarDoc('.$data[$i]['id'].');"><i class="fas fa-recycle"></i></button>
+                    </div>';
+                }
+                    
+            }
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function registrar_documento(){
+            $nombre=$_POST['nombre'];
+            $id=$_POST['id'];
+            if(empty($nombre)){
+                $msg =array('msg' =>'Todo los campos son obligatorios','icono'=>'warning');
+            }else{
+                if ($id== "") {
+                    $data=$this->model->registrarDocumento($nombre);
+                    if($data == "ok") {
+                        $msg =array('msg' =>'Documento registrado con éxito','icono'=>'success');
+                    }else if($data == "existe"){
+                        $msg =array('msg' =>'El documento ya éxiste','icono'=>'warning');
+                    } else {
+                        $msg =array('msg' =>'Error al registrar el documento','icono'=>'error');
+                    }
+                }else {
+                    $data=$this->model->modificarDocumento($nombre,$id);
+                    if($data == "modificado") {
+                        $msg =array('msg' =>'Documento modificado con éxito','icono'=>'success');
+                    }else {
+                        $msg =array('msg' =>'Error al modificado el documento','icono'=>'error');
+                    } 
+                }
+                
+            }
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function editar_documento(int $id){
+            $data = $this->model->editarDoc($id);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function eliminar_documento(int $id){
+            $data = $this->model->accionDoc(0, $id);
+            if($data ==1){
+                $msg =array('msg' =>'Documento dado de baja','icono'=>'success');
+            }else {
+                $msg =array('msg' =>'Error al eliminar el documento','icono'=>'error');
+            }
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function reingresar_documento(int $id){
+            $data = $this->model->accionDoc(1,$id);
+            if($data ==1){
+                $msg =array('msg' =>'Documento reingresado con éxito','icono'=>'success');
+            }else {
+                $msg =array('msg' =>'Error al reingresar el documento','icono'=>'error');
+            }
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
     }
 ?>

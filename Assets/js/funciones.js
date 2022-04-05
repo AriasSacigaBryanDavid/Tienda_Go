@@ -1,7 +1,8 @@
-let tblUsuarios,tblCajas ,tblClientes,tblCategorias,tblMedidas,tblProductos,tblCargos;
+let tblUsuarios,tblCajas ,tblClientes,tblCategorias,tblMedidas,tblProductos,tblCargos,tblAlmacenes,tblIdentidades;
 
-/** Inicio de Usuario */
+
 document.addEventListener("DOMContentLoaded", function(){
+    /** Inicio de Usuario */
     tblUsuarios = $('#tblUsuarios').DataTable( {
         ajax: {
             url: base_url + "Usuarios/listar",
@@ -167,6 +168,46 @@ document.addEventListener("DOMContentLoaded", function(){
             ]
     });
     /** Fin de almacenes */
+    /** Inicio de identidades */
+    tblIdentidades = $('#tblIdentidades').DataTable( {
+    ajax: {
+        url: base_url + "Administracion/listar_identidades" ,
+        dataSrc: ''
+    },
+    columns: [
+        {'data' : 'id'},
+        {'data' : 'nombre'},
+        {'data' : 'estado'},
+        {'data' : 'acciones'}
+    ],
+    language: {
+        "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+    },
+    dom: "<'row'<'col-sm-4'l><'col-sm-8'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+    });
+    /** Fin de la tabla identidades*/
+    /** Inicio de documentos */
+    tblDocumentos = $('#tblDocumentos').DataTable( {
+        ajax: {
+            url: base_url + "Administracion/listar_documentos" ,
+            dataSrc: ''
+        },
+        columns: [
+            {'data' : 'id'},
+            {'data' : 'nombre'},
+            {'data' : 'estado'},
+            {'data' : 'acciones'}
+        ],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+    });
+    /** Fin de documentos*/
      /** Inicio de cajas */
      tblCajas = $('#tblCajas').DataTable( {
         ajax: {
@@ -646,6 +687,204 @@ function btnReingresarAlm(id){
     })
 }
 /** Fin de almacenes */
+/*******************************/
+/** inicio de identidad */
+function frmIdentidad(){
+    document.getElementById("title").innerHTML ="Agregar Identidad";
+    document.getElementById("btnAccion").innerHTML ="Agregar";
+    document.getElementById("frmIdentidad").reset();
+    $("#nuevo_identidad").modal("show");
+    document.getElementById("id").value ="";
+}
+function registrarIden(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    if( nombre.value=="" ){
+        alertas('Todo los campos son obligatorios', 'warning');
+    }else{
+        const url = base_url +"Administracion/registrar_identidad";
+        const frm = document.getElementById("frmIdentidad");
+        const http = new XMLHttpRequest();
+        http.open("POST",url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                const res= JSON.parse(this.responseText);
+                $("#nuevo_identidad").modal("hide");
+                alertas(res.msg, res.icono);
+                tblIdentidades.ajax.reload();
+            }    
+        }
+    }
+}
+function btnEditarIden(id){
+    document.getElementById("title").innerHTML ="Actualizar Identidad";
+    document.getElementById("btnAccion").innerHTML ="Actualizar";
+    const url = base_url +"Administracion/editar_identidad/"+id;
+    const http = new XMLHttpRequest();
+    http.open("GET",url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            const res = JSON.parse(this.responseText); 
+            document.getElementById("id").value =res.id;
+            document.getElementById("nombre").value=res.nombre; 
+            $("#nuevo_identidad").modal("show");  
+        }
+    }
+}
+function btnEliminarIden(id){
+    Swal.fire({
+        title: '¿Deseas Eliminar la Identidad?',
+        text: "¡La Identidad no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/eliminar_identidad/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res=JSON.parse(this.responseText);
+                  alertas(res.msg, res.icono);
+                  tblIdentidades.ajax.reload();
+               }
+            }
+
+        } 
+    })
+}
+function btnReingresarIden(id){
+    Swal.fire({
+        title: '¿Está seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/reingresar_identidad/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  tblIdentidades.ajax.reload();
+                  alertas(res.msg, res.icono);   
+                }
+            }
+        }
+    })
+}
+/** Fin de identidad */
+/*******************************/
+/** inicio de documento */
+function frmDocumento(){
+    document.getElementById("title").innerHTML ="Agregar Documento";
+    document.getElementById("btnAccion").innerHTML ="Agregar";
+    document.getElementById("frmDocumento").reset();
+    $("#nuevo_documento").modal("show");
+    document.getElementById("id").value ="";
+}
+function registrarDoc(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    if( nombre.value=="" ){
+        alertas('Todo los campos son obligatorios', 'warning');
+    }else{
+        const url = base_url +"Administracion/registrar_documento";
+        const frm = document.getElementById("frmDocumento");
+        const http = new XMLHttpRequest();
+        http.open("POST",url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                const res= JSON.parse(this.responseText);
+                $("#nuevo_documento ").modal("hide");
+                alertas(res.msg, res.icono);
+                tblDocumentos.ajax.reload();
+            }     
+        }
+    }
+}
+function btnEditarDoc(id){
+    document.getElementById("title").innerHTML ="Actualizar Documento";
+    document.getElementById("btnAccion").innerHTML ="Actualizar";
+    const url = base_url +"Administracion/editar_documento/"+id;
+    const http = new XMLHttpRequest();
+    http.open("GET",url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            const res = JSON.parse(this.responseText); 
+            document.getElementById("id").value =res.id;
+            document.getElementById("nombre").value=res.nombre; 
+            $("#nuevo_documento").modal("show");  
+        }
+
+    }
+}
+function btnEliminarDoc(id){
+    Swal.fire({
+        title: '¿Deseas Eliminar documento?',
+        text: "¡El documento no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/eliminar_documento/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res=JSON.parse(this.responseText);
+                  alertas(res.msg, res.icono);
+                  tblDocumentos.ajax.reload();
+               }
+            }
+        }
+    })
+}
+function btnReingresarDoc(id){
+    Swal.fire({
+        title: '¿Está seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/reingresar_documento/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  tblDocumentos.ajax.reload();
+                  alertas(res.msg, res.icono);   
+                }
+            }
+        }
+    })
+}
+/** Fin de documento */
 /*******************************/
 /** inicio de caja */
 function frmCaja(){

@@ -123,7 +123,6 @@
         $data = $this->select($sql);
         return $data;
     }
-    
     public function accionAlm(int $estado, int $id){
         $this->id=$id;
         $this->estado=$estado;
@@ -133,9 +132,109 @@
         return $data;
     }
 
+    // Inicio de Identidades
+    public function getIdentidades(){
+        $sql="SELECT * FROM identidades";
+        $data= $this->selectAll($sql);
+        return $data;
+    }
+    public function registrarIdentidad(string $nombre){
+        $this->nombre =$nombre;
+        $verificar="SELECT * FROM identidades WHERE nombre = '$this->nombre'";
+        $existe=$this->select($verificar);
+        if (empty($existe)) {
+            $sql="INSERT INTO identidades (nombre) VALUES (?)";
+            $datos= array( $this->nombre);
+            $data=$this->save($sql, $datos);
+            if ($data == 1){
+                    $res = "ok";
+            }else{
+                    $res = "error";
+                }
+        }else{
+            $res ="existe";
+        }
+        
+        return $res;
+    }
+    public function modificarIdentidad( string $nombre, int $id){
+        $this->nombre =$nombre;
+        $this->id=$id;
+        $sql="UPDATE identidades SET nombre=? WHERE id=?";
+        $datos= array($this->nombre, $this->id);
+        $data=$this->save($sql, $datos);
+            if ($data == 1){
+                $res = "modificado";
+            }else{
+                $res = "error";
+            }
+        return $res;
+    }
+    public function editarIdentidad(int $id){
+        $sql = "SELECT * FROM identidades WHERE id = $id";
+        $data = $this->select($sql);
+        return $data;
     }
     
+    public function accionIdentidad(int $estado, int $id){
+        $this->id=$id;
+        $this->estado=$estado;
+        $sql = "UPDATE identidades SET  estado =? WHERE id=?";
+        $datos = array($this->estado, $this->id);
+        $data = $this->save($sql, $datos);
+        return $data;
+    }
+    // Inicio de Documentos
+    public function getDocumentos(){
+        $sql="SELECT * FROM documentos";
+        $data= $this->selectAll($sql);
+        return $data;
+    }
+    public function registrarDocumento(string $nombre){
+        $this->nombre =$nombre;
+        $verificar="SELECT * FROM documentos WHERE nombre = '$this->nombre'";
+        $existe=$this->select($verificar);
+        if (empty($existe)) {
+            $sql="INSERT INTO documentos (nombre) VALUES (?)";
+            $datos= array( $this->nombre);
+            $data=$this->save($sql, $datos);
+            if ($data == 1){
+                    $res = "ok";
+            }else{
+                    $res = "error";
+                }
+        }else{
+            $res ="existe";
+        }
+        
+        return $res;
+    }
+    public function modificarDocumento( string $nombre, int $id){
+        $this->nombre =$nombre;
+        $this->id=$id;
+        $sql="UPDATE documentos SET nombre=? WHERE id=?";
+        $datos= array($this->nombre, $this->id);
+        $data=$this->save($sql, $datos);
+            if ($data == 1){
+                $res = "modificado";
+            }else{
+                $res = "error";
+            }
+        return $res;
+    }
+    public function editarDoc(int $id){
+        $sql = "SELECT * FROM documentos WHERE id = $id";
+        $data = $this->select($sql);
+        return $data;
+    }
     
-
-
+    public function accionDoc(int $estado, int $id){
+        $this->id=$id;
+        $this->estado=$estado;
+        $sql = "UPDATE documentos SET  estado =? WHERE id=?";
+        $datos = array($this->estado, $this->id);
+        $data = $this->save($sql, $datos);
+        return $data;
+    }
+    }
 ?>
