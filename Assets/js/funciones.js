@@ -541,6 +541,112 @@ function btnReingresarCar(id){
 }
 /** Fin de cargos */
 /*******************************/
+/** inicio de almacenes */
+function frmAlmacen(){
+    document.getElementById("title").innerHTML ="Agregar Almacén";
+    document.getElementById("btnAccion").innerHTML ="Agregar";
+    document.getElementById("frmAlmacen").reset();
+    $("#nuevo_almacen").modal("show");
+    document.getElementById("id").value ="";
+}
+function registrarAlm(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    const direccion = document.getElementById("direccion");
+    const encargado = document.getElementById("encargado");
+    const telefono = document.getElementById("telefono");
+    const correo = document.getElementById("correo");
+    if( nombre.value=="" || direccion.value=="" || encargado.value=="" || telefono.value=="" || correo.value==""){
+        alertas('Todo los campos son obligatorios', 'warning');
+    }else{
+        const url = base_url +"Administracion/registrar_almacen";
+        const frm = document.getElementById("frmAlmacen");
+        const http = new XMLHttpRequest();
+        http.open("POST",url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                const res= JSON.parse(this.responseText);
+                $("#nuevo_almacen").modal("hide");
+                alertas(res.msg, res.icono);
+                tblAlmacenes.ajax.reload();
+            }  
+        }
+    }
+}
+function btnEditarAlm(id){
+    document.getElementById("title").innerHTML ="Actualizar Almacén";
+    document.getElementById("btnAccion").innerHTML="Actualizar";
+    const url = base_url +"Administracion/editar_almacen/"+id;
+    const http = new XMLHttpRequest();
+    http.open("GET",url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+          const res = JSON.parse(this.responseText); 
+          document.getElementById("id").value =res.id;
+            document.getElementById("nombre").value=res.nombre;
+            document.getElementById("direccion").value=res.direccion;
+            document.getElementById("encargado").value=res.encargado;
+            document.getElementById("telefono").value=res.telefono;
+            document.getElementById("correo").value=res.correo;
+            $("#nuevo_almacen").modal("show");  
+        }
+    }   
+}
+function btnEliminarAlm(id){
+    Swal.fire({
+        title: '¿Deseas Eliminar Almacén?',
+        text: "¡El almacén no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/eliminar_almacen/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  alertas(res.msg, res.icono);
+                  tblAlmacenes.ajax.reload();
+                }
+            }
+        }
+    })
+}
+function btnReingresarAlm(id){
+    Swal.fire({
+        title: '¿Está seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Administracion/reingresar_almacen/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  tblAlmacenes.ajax.reload();
+                  alertas(res.msg, res.icono);   
+                }
+            }
+        }
+    })
+}
+/** Fin de almacenes */
+/*******************************/
 /** inicio de caja */
 function frmCaja(){
     document.getElementById("title").innerHTML ="Agregar Caja";
