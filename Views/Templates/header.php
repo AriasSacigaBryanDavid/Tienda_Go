@@ -42,36 +42,34 @@
                         </div> -->
                         <div class="nav">
                             <!-- menu de Administración-->
-                           
+                            
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tools text-success fa-2x"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list text-success fa-2x"></i></div>
                                 Administración
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?php echo base_url;?>Usuarios"><i class="fas fa-user-cog"></i> Usuarios</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Cajas"> <i class="fas fa-cash-register"></i>Cajas</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Administracion"><i class="fas fa-cogs"></i>Configuración</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/cargos"><i class="fas fa-cogs"></i>Cargos</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/almacenes"><i class="fas fa-cogs"></i>Almacenes</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/identidades"><i class="fas fa-cogs"></i>Identidades</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/documentos"><i class="fas fa-cogs"></i>Documentos</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Usuarios">Usuarios</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/almacenes">Almacenes</a>
                                 </nav>
                             </div>
-
-                            <!-- menu de configuracion-->
-                            <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseConfiguracion" aria-expanded="false" aria-controls="collapseConfiguracion">
+                            
+                            <!-- menu de configuración-->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseConfiguracion" aria-expanded="false" aria-controls="collapseConfiguracion">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tools text-success fa-2x"></i></div>
-                                Configuracion
+                                Configuración
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
                             </a>
                             <div class="collapse" id="collapseConfiguracion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?php echo base_url;?>Configuraciones">configuración</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Configuraciones/cargos">Cargos</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Cajas"> Cajas</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion">Configuración</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/cargos">Cargos</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/identidades">Identidades</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Administracion/documentos">Documentos</a>
                                 </nav>
-                            </div> -->
+                            </div>
                             <!-- menu de clientes -->
                             <a class="nav-link" href="<?php echo base_url; ?>Clientes" >
                                 <div class="sb-nav-link-icon"><i class="fas fa-users text-success fa-2x"></i></div>
