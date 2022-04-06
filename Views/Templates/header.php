@@ -71,10 +71,18 @@
                                 </nav>
                             </div>
                             <!-- menu de clientes -->
-                            <a class="nav-link" href="<?php echo base_url; ?>Clientes" >
+                            
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users text-success fa-2x"></i></div>
-                                Clientes 
+                                Contactos
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
                             </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?php echo base_url; ?>Contactos">Proveedores</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Contactos/clientes">Clientes</a>
+                                </nav>
+                            </div>
                             <!-- menu de Productos -->
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProductos" aria-expanded="false" aria-controls="collapseProductos">
                                 <div class="sb-nav-link-icon"><i class="fas fa-store text-success fa-2x"></i></div>

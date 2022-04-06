@@ -208,6 +208,79 @@ document.addEventListener("DOMContentLoaded", function(){
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>"
     });
     /** Fin de documentos*/
+    /** Inicio de proveedores */
+    tblProveedores = $('#tblProveedores').DataTable( {
+        ajax: {
+            url: base_url + "Contactos/listar_proveedores" ,
+            dataSrc: ''
+        },
+        columns: [
+            {'data' : 'id'},
+            {'data' : 'nombre'},
+            {'data' : 'identidad'},
+            {'data' : 'n_identidad'},
+            {'data' : 'telefono'},
+            {'data' : 'correo'},
+            {'data' : 'direccion'},
+            {'data' : 'estado'},
+            {'data' : 'acciones'}
+        ],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                    //Botón para Excel
+                    extend: 'excelHtml5',
+                    footer: true,
+                    title: 'Archivo',
+                    filename: 'Export_File',
+     
+                    //Aquí es donde generas el botón personalizado
+                    text: '<span class="badge badge-success"><i class="fas fa-file-excel"></i></span>'
+                },
+                //Botón para PDF
+                {
+                    extend: 'pdfHtml5',
+                    download: 'open',
+                    footer: true,
+                    title: 'Reporte de Proveedores',
+                    filename: 'Reporte de Proveedores',
+                    text: '<span class="badge  badge-danger"><i class="fas fa-file-pdf"></i></span>',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                //Botón para copiar
+                {
+                    extend: 'copyHtml5',
+                    footer: true,
+                    title: 'Reporte de Proveedores',
+                    filename: 'Reporte de Proveedores',
+                    text: '<span class="badge  badge-primary"><i class="fas fa-copy"></i></span>',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                //Botón para print
+                {
+                    extend: 'print',
+                    footer: true,
+                    filename: 'Export_File_print',
+                    text: '<span class="badge badge-light"><i class="fas fa-print"></i></span>'
+                },
+                //Botón para ocultar
+                {
+                    extend: 'colvis',
+                    text: '<span class="badge  badge-info"><i class="fas fa-columns"></i></span>',
+                    postfixButtons: ['colvisRestore']
+                }
+            ]
+        
+    });
+     /** Fin de la tabla proveedores*/ 
      /** Inicio de cajas */
      tblCajas = $('#tblCajas').DataTable( {
         ajax: {
@@ -885,6 +958,118 @@ function btnReingresarDoc(id){
     })
 }
 /** Fin de documento */
+/*******************************/
+/*******************************/
+/** inicio de Proveedor */
+function frmProveedor(){
+    document.getElementById("title").innerHTML ="Registrar Proveedor";
+    document.getElementById("btnAccion").innerHTML ="Registrar";
+    document.getElementById("frmProveedor").reset();
+    $("#nuevo_proveedor").modal("show");
+    document.getElementById("id").value ="";
+}
+function registrarPro(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    const identidad = document.getElementById("identidad");
+    const n_identidad = document.getElementById("n_identidad");
+    const telefono = document.getElementById("telefono");
+    const correo = document.getElementById("correo");
+    const direccion = document.getElementById("direccion");
+    if(nombre.value=="" || identidad.value=="" || n_identidad.value=="" || telefono.value==""||correo.value=="" ||direccion.value==""){
+        alertas('Todo los campos son obligatorios', 'warning');
+    }else{
+        const url = base_url +"Contactos/registrar_proveedor";
+        const frm = document.getElementById("frmProveedor");
+        const http = new XMLHttpRequest();
+        http.open("POST",url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                const res = JSON.parse(this.responseText);
+                $("#nuevo_proveedor").modal("hide");
+                alertas(res.msg, res.icono);
+                tblProveedores.ajax.reload();
+            }
+        }
+    }
+}
+function btnEditarPro(id){
+    document.getElementById("title").innerHTML ="Actualizar Proveedor";
+    document.getElementById("btnAccion").innerHTML="Actualizar";
+    const url = base_url +"Contactos/editar_proveedor/"+id;
+    const http = new XMLHttpRequest();
+    http.open("GET",url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+          const res = JSON.parse(this.responseText); 
+            document.getElementById("id").value =res.id;
+            document.getElementById("nombre").value=res.nombre;
+            document.getElementById("identidad").value =res.id_identidad;
+            document.getElementById("n_identidad").value = res.n_identidad;
+            document.getElementById("telefono").value=res.telefono;
+            document.getElementById("correo").value = res.correo;
+            document.getElementById("direccion").value=res.direccion;  
+            $("#nuevo_proveedor").modal("show");  
+        }
+
+    }
+
+    
+}
+function btnEliminarPro(id){
+    Swal.fire({
+        title: '¿Deseas Eliminar proveedor?',
+        text: "¡El proveedor no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Contactos/eliminar_proveedor/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  alertas(res.msg, res.icono);
+                  tblProveedores.ajax.reload();
+                }
+            }
+        }
+      })
+}
+function btnReingresarPro(id){
+    Swal.fire({
+        title: '¿Está seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Contactos/reingresar_proveedor/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  tblProveedores.ajax.reload();
+                  alertas(res.msg, res.icono);
+                }
+            }
+        }
+    })
+}
+/** Fin de proveedores */
 /*******************************/
 /** inicio de caja */
 function frmCaja(){
