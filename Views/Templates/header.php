@@ -43,12 +43,12 @@
                         <div class="nav">
                             <!-- menu de Administración-->
                             
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdministracion" aria-expanded="false" aria-controls="collapseAdministracion">
                                 <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list text-success fa-2x"></i></div>
                                 Administración
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div class="collapse" id="collapseAdministracion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<?php echo base_url;?>Usuarios">Usuarios</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Administracion/almacenes">Almacenes</a>
@@ -70,14 +70,14 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Administracion/documentos">Documentos</a>
                                 </nav>
                             </div>
-                            <!-- menu de clientes -->
+                            <!-- menu de contactos -->
                             
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseContactos" aria-expanded="false" aria-controls="collapseContactos">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users text-success fa-2x"></i></div>
                                 Contactos
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div class="collapse" id="collapseContactos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<?php echo base_url; ?>Contactos">Proveedores</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Contactos/clientes">Clientes</a>
