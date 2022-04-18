@@ -108,7 +108,7 @@
                                     <a class="nav-link" href="<?php echo base_url; ?>Compras/historial"><i class="fas fa-history mr-2 "></i> historial compra</a>
                                 </nav>
                             </div>
-                            <!-- menu de compras-->
+                            <!-- menu de Ventas-->
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseVentas" aria-expanded="false" aria-controls="collapseVentas">
                                 <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart text-success fa-2x"></i></div>
                                 Ventas
