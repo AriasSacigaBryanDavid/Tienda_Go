@@ -79,7 +79,7 @@
                             </a>
                             <div class="collapse" id="collapseContactos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?php echo base_url; ?>Contactos">Proveedores</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Proveedores">Proveedores</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Contactos/clientes">Clientes</a>
                                 </nav>
                             </div>
