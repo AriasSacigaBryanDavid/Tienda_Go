@@ -1,5 +1,5 @@
 <?php
-    class Proveedores extends Controller{
+    class Contactos extends Controller{
         public function __construct(){
             session_start();
             parent::__construct();
@@ -12,7 +12,7 @@
             $this->views->getView($this, "index",$data);
         }
     
-        public function listar(){
+        public function listar_proveedores(){
              $data = $this->model->getProveedores();
              for ($i=0; $i<count($data); $i++){
                  if($data[$i]['estado'] ==1){
@@ -32,7 +32,7 @@
              echo json_encode($data, JSON_UNESCAPED_UNICODE);
              die();
         }
-        public function registrar(){
+        public function registrar_proveedor(){
             $nombre=$_POST['nombre'];
             $identidad= $_POST['identidad'];
             $n_identidad = $_POST['n_identidad'];
@@ -65,12 +65,12 @@
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
         }
-        public function editar(int $id){
+        public function editar_proveedor(int $id){
             $data = $this->model->editarPro($id);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
         }
-        public function eliminar(int $id){
+        public function eliminar_proveedor(int $id){
             $data = $this->model->accionPro(0, $id);
             if($data ==1){
                 $msg =array('msg' =>'Proveedor dado de baja','icono'=>'success');
@@ -80,7 +80,7 @@
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
         }
-        public function reingresar(int $id){
+        public function reingresar_proveedor(int $id){
             $data = $this->model->accionPro(1, $id);
             if($data ==1){
                 $msg =array('msg' =>'Proveedor reingresado con éxito','icono'=>'success');

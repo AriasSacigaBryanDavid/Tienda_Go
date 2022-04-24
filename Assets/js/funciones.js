@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function(){
     /** Inicio de proveedores */
     tblProveedores = $('#tblProveedores').DataTable( {
         ajax: {
-            url: base_url + "Proveedores/listar" ,
+            url: base_url + "Contactos/listar_proveedores" ,
             dataSrc: ''
         },
         columns: [
@@ -977,7 +977,7 @@ function registrarPro(e){
     if(nombre.value=="" || identidad.value=="" || n_identidad.value=="" || telefono.value==""||correo.value=="" ||direccion.value==""){
         alertas('Todo los campos son obligatorios', 'warning');
     }else{
-        const url = base_url +"Proveedores/registrar";
+        const url = base_url +"Contactos/registrar_proveedor";
         const frm = document.getElementById("frmProveedor");
         const http = new XMLHttpRequest();
         http.open("POST",url, true);
@@ -995,7 +995,7 @@ function registrarPro(e){
 function btnEditarPro(id){
     document.getElementById("title").innerHTML ="Actualizar Proveedor";
     document.getElementById("btnAccion").innerHTML="Actualizar";
-    const url = base_url +"Proveedores/editar/"+id;
+    const url = base_url +"Contactos/editar_proveedor/"+id;
     const http = new XMLHttpRequest();
     http.open("GET",url, true);
     http.send();
@@ -1028,7 +1028,7 @@ function btnEliminarPro(id){
         cancelButtonText:'No'
       }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url +"Proveedores/eliminar/"+id;
+            const url = base_url +"Contactos/eliminar_proveedor/"+id;
             const http = new XMLHttpRequest();
             http.open("GET",url, true);
             http.send();
@@ -1053,7 +1053,7 @@ function btnReingresarPro(id){
         cancelButtonText:'No'
     }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url +"Proveedores/reingresar/"+id;
+            const url = base_url +"Contactos/reingresar_proveedor/"+id;
             const http = new XMLHttpRequest();
             http.open("GET",url, true);
             http.send();

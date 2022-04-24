@@ -1,5 +1,5 @@
 <?php
-    class ProveedoresModel extends Query{
+    class ContactosModel extends Query{
         private $nombre,$id_identidad, $n_identidad, $telefono, $correo, $direccion, $id, $estado;
         
         public function __construct(){
