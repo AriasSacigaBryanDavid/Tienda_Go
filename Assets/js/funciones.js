@@ -1951,7 +1951,6 @@ function buscarCodigo(e){
         alertas('Ingrese el Código de Barras ', 'warning');
     }
 }
-
 function buscarCodigoV(e){
     e.preventDefault();
     const cod = document.getElementById("codigo").value;
