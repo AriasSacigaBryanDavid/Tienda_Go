@@ -4,6 +4,7 @@
             session_start();
             parent::__construct();
         }
+        //Inicio de Proveedores
         public function index(){
             if(empty($_SESSION['activo'])){
                 header("location: ".base_url);
@@ -89,6 +90,13 @@
             }
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
+        }
+
+        //Inicio de clientes
+
+        public function clientes(){
+            $data['identidades']=$this->model->getIdentidades();
+            $this->views->getView($this,"clientes", $data);
         }
         
 
