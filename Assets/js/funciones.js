@@ -365,20 +365,6 @@ document.addEventListener("DOMContentLoaded", function(){
         ]
     });
      /** Fin de la tabla cajas*/
-    /** Inicio de categoria */
-    tblCategorias = $('#tblCategorias').DataTable( {
-        ajax: {
-            url: base_url + "Categorias/listar" ,
-            dataSrc: ''
-        },
-        columns: [
-            {'data' : 'id'},
-            {'data' : 'nombre'},
-            {'data' : 'estado'},
-            {'data' : 'acciones'}
-        ]
-    });
-    /** Fin de categoria */
     /** Inicio de medidas */
     tblMedidas = $('#tblMedidas').DataTable( {
         ajax: {
@@ -487,6 +473,20 @@ document.addEventListener("DOMContentLoaded", function(){
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>"
     });
     /** Fin de Marcas*/
+    /** Inicio de categoria */
+    tblCategorias = $('#tblCategorias').DataTable( {
+        ajax: {
+            url: base_url + "Productos/listar_categorias" ,
+            dataSrc: ''
+        },
+        columns: [
+            {'data' : 'id'},
+            {'data' : 'nombre'},
+            {'data' : 'estado'},
+            {'data' : 'acciones'}
+        ]
+    });
+    /** Fin de categoria */
     /** Inicio de historial de compra */
     $('#t_historial_c').DataTable( {
         ajax: {
@@ -1422,7 +1422,7 @@ function btnReingresarCaj(id){
 /*******************************/
 /** inicio de categorias */
 function frmCategoria(){
-    document.getElementById("title").innerHTML ="Agregar Categoria";
+    document.getElementById("title").innerHTML ="Agregar Categoría";
     document.getElementById("btnAccion").innerHTML ="Agregar";
     document.getElementById("frmCategoria").reset();
     $("#nuevo_categoria").modal("show");
@@ -1432,15 +1432,9 @@ function registrarCateg(e){
     e.preventDefault();
     const nombre = document.getElementById("nombre");
     if( nombre.value=="" ){
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Porfavor ingrese los datos, es obligatorios',
-            showConfirmButton: false,
-            timer: 3000
-          })
+        alertas('Todo los campos son obligatorios', 'warning' );
     }else{
-        const url = base_url +"Categorias/registrar";
+        const url = base_url +"Productos/registrar_categorias";
         const frm = document.getElementById("frmCategoria");
         const http = new XMLHttpRequest();
         http.open("POST",url, true);
@@ -1448,47 +1442,17 @@ function registrarCateg(e){
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 const res= JSON.parse(this.responseText);
-                    if(res == "si"){
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Categoria agregado con éxito',
-                            showConfirmButton: false,
-                            timer: 3000
-                          })
-                          frm.reset();
-                          tblCategorias.ajax.reload();
-                          $("#nuevo_categoria").modal("hide");
-                    }else if (res == "modificado") {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Categoria modificado con éxito',
-                            showConfirmButton: false,
-                            timer: 3000
-                          })
-                          $("#nuevo_categoria").modal("hide");
-                          tblCategorias.ajax.reload();
-                    }else{
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: res,
-                            showConfirmButton: false,
-                            timer: 3000
-                          })
-                    }
-                    
-                }
-                
-            }
-
+                $("#nuevo_categoria").modal("hide");
+                alertas(res.msg, res.icono);
+                tblCategorias.ajax.reload();    
+            }    
         }
+    }
 }
 function btnEditarCateg(id){
-    document.getElementById("title").innerHTML ="Actualizar Categoria";
+    document.getElementById("title").innerHTML ="Actualizar Categoría";
     document.getElementById("btnAccion").innerHTML ="Actualizar";
-    const url = base_url +"Categorias/editar/"+id;
+    const url = base_url +"Productos/editar_categoria/"+id;
     const http = new XMLHttpRequest();
     http.open("GET",url, true);
     http.send();
@@ -1514,35 +1478,17 @@ function btnEliminarCateg(id){
         cancelButtonText:'No'
       }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url +"Categorias/eliminar/"+id;
+            const url = base_url +"Productos/eliminar_categoria/"+id;
             const http = new XMLHttpRequest();
             http.open("GET",url, true);
             http.send();
             http.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
                   const res=JSON.parse(this.responseText);
-                  if(res == "ok"){
-                    Swal.fire(
-                     'Mensaje!',
-                     'Categoria eliminado con éxito.',
-                     'success'
-                     )
-                     tblCategorias.ajax.reload();
-               }else{
-                 Swal.fire(
-                     'Mensaje!',
-                     res,
-                     'error'
-                     )
-                    }
-               }
+                  alertas(res.msg, res.icono);
+                  tblCategorias.ajax.reload();
+                }
             }
-
-            Swal.fire(
-            'Mensaje!',
-            'elimiado',
-            'error'
-            )
         }
         
     })
@@ -1556,33 +1502,21 @@ function btnReingresarCateg(id){
         cancelButtonColor: '#d33',
         confirmButtonText: 'si',
         cancelButtonText:'No'
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url +"Categorias/reingresar/"+id;
+            const url = base_url +"Productos/reingresar_categoria/"+id;
             const http = new XMLHttpRequest();
             http.open("GET",url, true);
             http.send();
             http.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
                   const res= JSON.parse(this.responseText);
-                    if(res == "ok"){
-                       Swal.fire(
-                        'Mensaje!',
-                        'Catalogo reingresado con éxito.',
-                        'success'
-                        )
-                        tblCategorias.ajax.reload();
-                  }else{
-                    Swal.fire(
-                        'Mensaje!',
-                        res,
-                        'error'
-                        )
-                  }
+                  tblCategorias.ajax.reload();
+                  alertas(res.msg, res.icono);   
                 }
             }
         }
-      })
+    })
 }
 /** Fin de categorias */
 /*******************************/
