@@ -91,9 +91,10 @@
                             </a>
                             <div class="collapse" id="collapseProductos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?php echo base_url;?>Productos"><i class="fas fa-folder"></i>Productos</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Productos/marcas"><i class="fas fa-poll-h"></i>Marcas</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Medidas"><i class="fas fa-ruler-vertical"></i> Medidas</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Categorias"><i class="fas fa-poll-h"></i>Categorias</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Productos"><i class="fas fa-folder"></i>Productos</a>
                                 </nav>
                             </div>
                             <!-- menu de compras-->

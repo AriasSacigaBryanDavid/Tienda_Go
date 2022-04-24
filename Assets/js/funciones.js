@@ -466,6 +466,27 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
             ]
     });
+    /** Fin de productos */
+    /** Inicio de Marcas */
+    tblMarcas = $('#tblMarcas').DataTable( {
+        ajax: {
+            url: base_url + "Productos/listar_marcas" ,
+            dataSrc: ''
+        },
+        columns: [
+            {'data' : 'id'},
+            {'data' : 'nombre'},
+            {'data' : 'estado'},
+            {'data' : 'acciones'}
+        ],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+    });
+    /** Fin de Marcas*/
     /** Inicio de historial de compra */
     $('#t_historial_c').DataTable( {
         ajax: {
@@ -1918,6 +1939,105 @@ function deleteImg(){
     document.getElementById('imagen_actual').value='';
 }
 /** Fin de productos*/
+/*******************************/
+/** inicio de marcas */
+function frmMarca(){
+    document.getElementById("title").innerHTML ="Agregar Marca";
+    document.getElementById("btnAccion").innerHTML ="Agregar";
+    document.getElementById("frmMarca").reset();
+    $("#nuevo_marca").modal("show");
+    document.getElementById("id").value ="";
+}
+function registrarMar(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    if( nombre.value=="" ){
+        alertas('Todo los campos son obligatorios', 'warning' );
+    }else{
+        const url = base_url +"Productos/registrar_marca";
+        const frm = document.getElementById("frmMarca");
+        const http = new XMLHttpRequest();
+        http.open("POST",url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                const res= JSON.parse(this.responseText);
+                $("#nuevo_marca").modal("hide");
+                alertas(res.msg, res.icono);
+                tblMarcas.ajax.reload();
+            }
+        }
+    }
+}
+function btnEditarMar(id){
+    document.getElementById("title").innerHTML ="Actualizar Marca";
+    document.getElementById("btnAccion").innerHTML ="Actualizar";
+    const url = base_url +"Productos/editar_marca/"+id;
+    const http = new XMLHttpRequest();
+    http.open("GET",url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            const res = JSON.parse(this.responseText); 
+            document.getElementById("id").value =res.id;
+            document.getElementById("nombre").value=res.nombre; 
+            $("#nuevo_marca").modal("show");  
+        }
+
+    }
+}
+function btnEliminarMar(id){
+    Swal.fire({
+        title: '¿Deseas Eliminar marca?',
+        text: "¡La categoria no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Productos/eliminar_marca/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res=JSON.parse(this.responseText);
+                  alertas(res.msg, res.icono);
+                  tblMarcas.ajax.reload();
+                }
+            }
+        }
+    })
+}
+function btnReingresarMar(id){
+    Swal.fire({
+        title: '¿Está seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si',
+        cancelButtonText:'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url +"Productos/reingresar_marca/"+id;
+            const http = new XMLHttpRequest();
+            http.open("GET",url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                  const res= JSON.parse(this.responseText);
+                  tblMarcas.ajax.reload();
+                  alertas(res.msg, res.icono);    
+                }
+            }
+        }
+      })
+}
+/** Fin de marcas */
 /*******************************/
 /** inicio de compras */
 function buscarCodigo(e){
