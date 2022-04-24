@@ -1,9 +1,9 @@
 <?php include "Views/Templates/header.php";?>
 <div class="card">
-    <div class="card-header bg-dark text-white">
+    <div class="card-header card-header-a text-white">
             <h4>Datos de la empresa</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body fondo-a text-white">
         <form id="frmEmpresa">
             <div class="row mb-2">
                 <div class="col-md-6">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" type="button" onclick="modificarEmpresa()">Modificar</button>
+            <button class="btn btn-a text-white" type="button" onclick="modificarEmpresa()">Modificar</button>
         </form>
     </div>
 </div>
