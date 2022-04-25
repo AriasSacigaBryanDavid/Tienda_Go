@@ -1434,7 +1434,7 @@ function registrarCateg(e){
     if( nombre.value=="" ){
         alertas('Todo los campos son obligatorios', 'warning' );
     }else{
-        const url = base_url +"Productos/registrar_categorias";
+        const url = base_url +"Productos/registrar_categoria";
         const frm = document.getElementById("frmCategoria");
         const http = new XMLHttpRequest();
         http.open("POST",url, true);

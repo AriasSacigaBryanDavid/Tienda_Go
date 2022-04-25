@@ -208,7 +208,7 @@
             $this->views->getView($this,"categorias");
         }
         public function listar_categorias(){
-            $data = $this->model->getCategorias();
+            $data = $this->model->getCategoria();
             for ($i =0; $i<count($data); $i++){
                 if($data[$i]['estado'] ==1){
                     $data[$i]['estado'] = '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
@@ -226,7 +226,7 @@
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             die();
         }
-        public function registrar_categorias(){
+        public function registrar_categoria(){
             $nombre=$_POST['nombre'];
             $id=$_POST['id'];
             if(empty($nombre)){

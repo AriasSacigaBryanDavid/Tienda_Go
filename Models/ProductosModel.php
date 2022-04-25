@@ -1,6 +1,6 @@
 <?php
     class ProductosModel extends Query{
-        private $codigo, $descripcion, $precio_compra, $precio_venta, $id_medida,$id_categoria,$id,$estado, $img;
+        //
        //Inicio de Productos
         public function __construct(){
             parent::__construct();
@@ -132,7 +132,7 @@
         // fin de marcas
         //******************************************************************* */
         // inicio de categorias
-        public function getCategorias(){
+        public function getCategoria(){
             $sql="SELECT * FROM categorias";
             $data= $this->selectAll($sql);
             return $data;
