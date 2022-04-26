@@ -94,7 +94,7 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Productos"><i class="fas fa-folder"></i>Productos</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Productos/marcas"><i class="fas fa-poll-h"></i>Marcas</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Productos/categorias"><i class="fas fa-poll-h"></i>Categorias</a>
-                                    <a class="nav-link" href="<?php echo base_url;?>Medidas"><i class="fas fa-ruler-vertical"></i> Medidas</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Productos/unidades"><i class="fas fa-ruler-vertical"></i> Unidades</a>
                                 </nav>
                             </div>
                             <!-- menu de compras-->

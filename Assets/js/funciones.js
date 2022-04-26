@@ -365,21 +365,6 @@ document.addEventListener("DOMContentLoaded", function(){
         ]
     });
      /** Fin de la tabla cajas*/
-    /** Inicio de medidas */
-    tblMedidas = $('#tblMedidas').DataTable( {
-        ajax: {
-            url: base_url + "Medidas/listar" ,
-            dataSrc: ''
-        },
-        columns: [
-            {'data' : 'id'},
-            {'data' : 'nombre'},
-            {'data' : 'nombre_corto'},
-            {'data' : 'estado'},
-            {'data' : 'acciones'}
-        ]
-    });
-    /** Fin de medidas */
     /** Inicio de productos */
     tblProductos = $('#tblProductos').DataTable( {
         ajax: {
@@ -487,6 +472,26 @@ document.addEventListener("DOMContentLoaded", function(){
         ]
     });
     /** Fin de categoria */
+    /** Inicio de unidades */
+    tblUnidades = $('#tblUnidades').DataTable( {
+        ajax: {
+            url: base_url + "Productos/listar_unidades" ,
+            dataSrc: ''
+        },
+        columns: [
+            {'data' : 'id'},
+            {'data' : 'nombre'},
+            {'data' : 'estado'},
+            {'data' : 'acciones'}
+        ],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-8'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+    });
+    /** Fin de unidades */
     /** Inicio de historial de compra */
     $('#t_historial_c').DataTable( {
         ajax: {
@@ -1520,93 +1525,55 @@ function btnReingresarCateg(id){
 }
 /** Fin de categorias */
 /*******************************/
-/** inicio de medidas */
-function frmMedida(){
-    document.getElementById("title").innerHTML ="Agregar Categoria";
+/** inicio de unidades */
+function frmUnidad(){
+    document.getElementById("title").innerHTML ="Agregar Unidad";
     document.getElementById("btnAccion").innerHTML ="Agregar";
-    document.getElementById("frmMedida").reset();
-    $("#nuevo_medida").modal("show");
+    document.getElementById("frmUnidad").reset();
+    $("#nuevo_unidad").modal("show");
     document.getElementById("id").value ="";
 }
-function registrarMed(e){
+function registrarUni(e){
     e.preventDefault();
     const nombre = document.getElementById("nombre");
-    const nombre_corto = document.getElementById("nombre_corto");
-    if( nombre.value=="" || nombre_corto.value==""){
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Porfavor ingrese los datos, es obligatorios',
-            showConfirmButton: false,
-            timer: 3000
-          })
+    if( nombre.value=="" ){
+        alertas('Todo los campos son obligatorios', 'warning');
     }else{
-        const url = base_url +"Medidas/registrar";
-        const frm = document.getElementById("frmMedida");
+        const url = base_url +"Productos/registrar_unidad";
+        const frm = document.getElementById("frmUnidad");
         const http = new XMLHttpRequest();
         http.open("POST",url, true);
         http.send(new FormData(frm));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 const res= JSON.parse(this.responseText);
-                    if(res == "si"){
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Medida registrado con éxito',
-                            showConfirmButton: false,
-                            timer: 3000
-                          })
-                          frm.reset();
-                          tblMedidas.ajax.reload();
-                          $("#nuevo_medida").modal("hide");
-                    }else if (res == "modificado") {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Medida modificado con éxito',
-                            showConfirmButton: false,
-                            timer: 3000
-                          })
-                          $("#nuevo_medida").modal("hide");
-                          tblMedidas.ajax.reload();
-                    }else{
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: res,
-                            showConfirmButton: false,
-                            timer: 3000
-                          })
-                    }
-                    
-                }
-                
+                $("#nuevo_unidad").modal("hide");
+                alertas(res.msg, res.icono);
+                tblUnidades.ajax.reload();  
             }
-
         }
+    }
 }
-function btnEditarMed(id){
-    document.getElementById("title").innerHTML ="Actualizar Cliente";
-    document.getElementById("btnAccion").innerHTML="Actualizar";
-    const url = base_url +"Medidas/editar/"+id;
+function btnEditarUni(id){
+    document.getElementById("title").innerHTML ="Actualizar Unidad";
+    document.getElementById("btnAccion").innerHTML ="Actualizar";
+    const url = base_url +"Productos/editar_unidad/"+id;
     const http = new XMLHttpRequest();
     http.open("GET",url, true);
     http.send();
     http.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-          const res = JSON.parse(this.responseText); 
-          document.getElementById("id").value =res.id;
-            document.getElementById("nombre").value=res.nombre;
-            document.getElementById("nombre_corto").value=res.nombre_corto;
-            $("#nuevo_medida").modal("show");  
+            const res = JSON.parse(this.responseText); 
+            document.getElementById("id").value =res.id;
+            document.getElementById("nombre").value=res.nombre; 
+            $("#nuevo_unidad").modal("show");  
         }
-    }   
+    }
 }
-function btnEliminarMed(id){
+function btnEliminarUni(id){
     Swal.fire({
-        title: '¿Deseas Eliminar medida?',
-        text: "¡la medida no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        title: '¿Deseas Eliminar unidad?',
+        text: "¡La categoria no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1615,33 +1582,21 @@ function btnEliminarMed(id){
         cancelButtonText:'No'
       }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url +"Medidas/eliminar/"+id;
+            const url = base_url +"Productos/eliminar_unidad/"+id;
             const http = new XMLHttpRequest();
             http.open("GET",url, true);
             http.send();
             http.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
-                  const res= JSON.parse(this.responseText);
-                    if(res == "ok"){
-                       Swal.fire(
-                        'Mensaje!',
-                        'Medida eliminado con éxito.',
-                        'success'
-                        )
-                        tblMedidas.ajax.reload();
-                  }else{
-                    Swal.fire(
-                        'Mensaje!',
-                        res,
-                        'error'
-                        )
-                  }
-                }
-            }
+                  const res=JSON.parse(this.responseText);
+                  alertas(res.msg, res.icono);
+                  tblUnidades.ajax.reload();
+               }
+            } 
         }
-      })
+    })
 }
-function btnReingresarMed(id){
+function btnReingresarUni(id){
     Swal.fire({
         title: '¿Está seguro de reingresar?',
         icon: 'warning',
@@ -1652,33 +1607,21 @@ function btnReingresarMed(id){
         cancelButtonText:'No'
       }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url +"Medidas/reingresar/"+id;
+            const url = base_url +"Productos/reingresar_unidad/"+id;
             const http = new XMLHttpRequest();
             http.open("GET",url, true);
             http.send();
             http.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
                   const res= JSON.parse(this.responseText);
-                    if(res == "ok"){
-                       Swal.fire(
-                        'Mensaje!',
-                        'Medidas reingresado con éxito.',
-                        'success'
-                        )
-                        tblMedidas.ajax.reload();
-                  }else{
-                    Swal.fire(
-                        'Mensaje!',
-                        res,
-                        'error'
-                        )
-                  }
+                  tblUnidades.ajax.reload();
+                  alertas(res.msg, res.icono);   
                 }
             }
         }
-      })
+    })
 }
-/** Fin de medidas */
+/** Fin de unidades */
 /*******************************/
 /** inicio de productos */
 function frmProducto(){
