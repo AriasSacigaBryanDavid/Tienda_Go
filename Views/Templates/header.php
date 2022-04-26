@@ -100,7 +100,7 @@
                             <!-- menu de compras-->
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCompras" aria-expanded="false" aria-controls="collapseCompras">
                                 <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart text-success fa-2x"></i></div>
-                                Compras
+                                Entradas
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down text-success"></i></div>
                             </a>
                             <div class="collapse" id="collapseCompras" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -117,8 +117,8 @@
                             </a>
                             <div class="collapse" id="collapseVentas" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?php echo base_url; ?>Compras/ventas"><i class="fas fa-shopping-cart mr-2"></i> Nueva Venta</a>
-                                    <a class="nav-link" href="<?php echo base_url; ?>Compras/historial_ventas"><i class="fas fa-history mr-2 "></i> Historial Ventas</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Ventas"><i class="fas fa-shopping-cart mr-2"></i> Nueva Venta</a>
+                                    <a class="nav-link" href="<?php echo base_url; ?>Ventas/historial_ventas"><i class="fas fa-history mr-2 "></i> Historial Ventas</a>
                                 </nav>
                             </div>
                         </div>
