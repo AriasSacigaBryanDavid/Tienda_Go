@@ -368,18 +368,19 @@ document.addEventListener("DOMContentLoaded", function(){
     /** Inicio de productos */
     tblProductos = $('#tblProductos').DataTable( {
         ajax: {
-            url: base_url + "Productos/listar" ,
+            url: base_url + "Productos/listar_productos",
             dataSrc: ''
         },
         columns: [
             {'data' : 'id'},
-            {'data' : 'imagen'},
             {'data' : 'codigo'},
+            {'data' : 'nombre'},
             {'data' : 'descripcion'},
-            {'data' : 'medida'},
+            {'data' : 'marca'},
             {'data' : 'categoria'},
+            {'data' : 'unidad'},
+            {'data' : 'precio_compra'},
             {'data' : 'precio_venta'},
-            {'data' : 'cantidad'},
             {'data' : 'estado'},
             {'data' : 'acciones'}
         ],
@@ -436,7 +437,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     postfixButtons: ['colvisRestore']
                 }
             ]
-    });
+    } );
     /** Fin de productos */
     /** Inicio de Marcas */
     tblMarcas = $('#tblMarcas').DataTable( {
@@ -1724,141 +1725,90 @@ function btnReingresarUni(id){
 /*******************************/
 /** inicio de productos */
 function frmProducto(){
-    document.getElementById("title").innerHTML ="Agregar producto";
-    document.getElementById("btnAccion").innerHTML = "Agregar";
-    document.getElementById("precios_compras").classList.remove("d-none");
+    document.getElementById("title").innerHTML = "Registrar Producto";
+    document.getElementById("btnAccion").innerHTML = "Registrar";
     document.getElementById("frmProducto").reset();
-    document.getElementById("id").value ="";
     $("#nuevo_producto").modal("show");
-    deleteImg();
-
+    document.getElementById("id").value ="";
 }
-function registrarProduc(e){
+function registrarProd(e){
     e.preventDefault();
-    const codigo =document.getElementById("codigo");
-    const descripcion= document.getElementById("descripcion");
-    const precio_compra= document.getElementById("precio_compra");
-    const precio_venta= document.getElementById("precio_venta");
-    const medida= document.getElementById("medida");
-    const categoria = document.getElementById("categoria");
-    if(codigo.value == "" || descripcion.value == "" || precio_compra.value == "" || precio_venta.value == "" || medida.value == "" || categoria.value == ""){
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Porfavor ingrese los datos, es obligatorio',
-            showConfirmButton: false,
-            timer: 3000
-          })
+    const codigo=document.getElementById("codigo");
+    const nombre=document.getElementById("nombre");
+    const descripcion=document.getElementById("descripcion");
+    const marca=document.getElementById("marca");
+    const categoria=document.getElementById("categoria");
+    const unidad=document.getElementById("unidad");
+    const precio_compra=document.getElementById("precio_compra");
+    const precio_venta=document.getElementById("precio_venta");
+    if(codigo.value=="" ||nombre.value == "" || descripcion.value== "" || marca.value== "" || categoria.value=="" || unidad.value=="" || precio_compra.value=="" || precio_venta.value=="") {
+        alertas('Todo los campos son obligatorios', 'warning');
     }else{
-        const url = base_url + "Productos/registrar";
-        const frm = document.getElementById("frmProducto");
-        const http = new XMLHttpRequest();
-        http.open("POST",url,true);
-        http.send(new FormData(frm));
-        http.onreadystatechange = function (){
-            if (this.readyState == 4 && this.status == 200) {
-                const res = JSON.parse(this.responseText);
-                if(res == "si"){
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Producto agregado con éxito',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                    frm.reset();
-                    $("#nuevo_producto").modal("hide");
-                    tblProductos.ajax.reload();
-                }else if (res == "modificado") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Producto modificado con éxito',
-                        showConfirmButton: false,
-                        timer: 3000
-                      })
-                    $("#nuevo_producto").modal("hide");
-                    tblProductos.ajax.reload();
-                }else{
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: res,
-                        showConfirmButton: false,
-                     timer: 3000
-                    })
-                }
+        const url =base_url + "Productos/registrar_producto";
+        const frm =document.getElementById("frmProducto");
+        const http=new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send( new FormData(frm));
+        http.onreadystatechange=function(){
+            if(this.readyState == 4 && this.status ==200){
+               const res = JSON.parse(this.responseText);
+               $("#nuevo_producto").modal("hide");
+               alertas(res.msg, res.icono);
+               tblProductos.ajax.reload();
             }
         }
-        
     }
-
 }
 function btnEditarProd(id){
-    document.getElementById("title").innerHTML ="Actualizar producto";
+    document.getElementById("title").innerHTML = "Actualizar producto";
     document.getElementById("btnAccion").innerHTML = "Actualizar";
-    const url = base_url + "Productos/editar/"+id;
-    const http = new XMLHttpRequest();
-    http.open("GET",url,true);
-    http.send();
-    http.onreadystatechange = function (){
-        if (this.readyState == 4 && this.status == 200){
-            const res =JSON.parse(this.responseText);
-            document.getElementById("id").value = res.id;
-            document.getElementById("codigo").value = res.codigo;
-            document.getElementById("descripcion").value = res.descripcion;
-            document.getElementById("precios_compras").classList.add("d-none");
-            document.getElementById("precio_venta").value = res.precio_venta;
-            document.getElementById("medida").value = res.id_medida;
-            document.getElementById("categoria").value =res.id_categoria;
-            document.getElementById("img-preview").src =base_url + 'Assets/img/'+res.imagen;
-            document.getElementById("icon-cerrar").innerHTML= `
-            <button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button>`;
-            document.getElementById("icon-image").classList.add("d-none");
-            document.getElementById("imagen_actual").value =res.imagen;
-            $("#nuevo_producto").modal("show");
+    const url =base_url + "Productos/editar_producto/"+id;
+        const http=new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange=function(){
+            if(this.readyState == 4 && this.status ==200){
+               const res = JSON.parse(this.responseText);
+               document.getElementById("id").value = res.id;
+               document.getElementById("codigo").value = res.codigo;
+               document.getElementById("nombre").value = res.nombre;
+               document.getElementById("descripcion").value = res.descripcion;
+               document.getElementById("marca").value = res.id_marca;
+               document.getElementById("categoria").value = res.id_categoria;
+               document.getElementById("unidad").value = res.id_unidad;
+               document.getElementById("precio_compra").value = res.precio_compra;
+               document.getElementById("precio_venta").value = res.precio_venta;
+               $("#nuevo_producto").modal("show");
+
+            }
         }
-    }
     
 }
 function btnEliminarProd(id){
     Swal.fire({
         title: '¿Deseas Eliminar Producto?',
-        text: "¡El producto no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
+        text: "¡El Producto no se eliminara de forma permanente!,  solo cambiará el estado a inactivo",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'si',
         cancelButtonText:'No'
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
-            const url =base_url + "Productos/eliminar/"+id;
+            const url =base_url + "Productos/eliminar_producto/"+id;
             const http=new XMLHttpRequest();
             http.open("GET", url, true);
             http.send();
             http.onreadystatechange=function(){
                 if(this.readyState == 4 && this.status ==200){
                     const res = JSON.parse(this.responseText);
-                    if (res == "ok" ){
-                        Swal.fire(
-                            'Mensaje!',
-                            'Producto eliminado con éxito.',
-                            'success'
-                        )
-                        tblProductos.ajax.reload();
-                    }else{
-                        Swal.fire(
-                            'Mensaje!',
-                            res,
-                            'error'
-                        )
-                    }
+                    alertas(res.msg, res.icono);
+                    tblProductos.ajax.reload();
                 }
-            }
-            
+            } 
         }
-      })
+    })
 }
 function btnReingresarProd(id){
     Swal.fire({
@@ -1869,50 +1819,21 @@ function btnReingresarProd(id){
         cancelButtonColor: '#d33',
         confirmButtonText: 'si',
         cancelButtonText:'No'
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
-            const url =base_url + "Productos/reingresar/"+id;
+            const url =base_url + "Productos/reingresar_producto/"+id;
             const http=new XMLHttpRequest();
             http.open("GET", url, true);
             http.send();
             http.onreadystatechange=function(){
                 if(this.readyState == 4 && this.status ==200){
                     const res = JSON.parse(this.responseText);
-                    if (res == "ok" ){
-                        Swal.fire(
-                            'Mensaje!',
-                            'producto reingresado con éxito.',
-                            'success'
-                        )
-                        tblProductos.ajax.reload();
-                    }else{
-                        Swal.fire(
-                            'Mensaje!',
-                            res,
-                            'error'
-                        )
-                    }
+                    tblProductos.ajax.reload();
+                    alertas(res.msg, res.icono);   
                 }
             }
-            
         }
-      })
-}
-function preview(e){
-    const url= e.target.files[0];
-    const urlTmp= URL.createObjectURL(url);
-    document.getElementById("img-preview").src= urlTmp;
-    document.getElementById("icon-image").classList.add("d-none");
-    document.getElementById("icon-cerrar").innerHTML= `
-    <button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button>
-    ${url['name']}`;
-}
-function deleteImg(){
-    document.getElementById("icon-cerrar").innerHTML=''; 
-    document.getElementById("icon-image").classList.remove("d-none");
-    document.getElementById("img-preview").src='';
-    document.getElementById('imagen').value='';
-    document.getElementById('imagen_actual').value='';
+    })
 }
 /** Fin de productos*/
 /*******************************/
