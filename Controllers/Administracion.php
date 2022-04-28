@@ -5,7 +5,7 @@
             session_start();
             parent::__construct();
         }
-        
+        // Inicio de Configuracion de Empresa
         public function index(){
             if (empty($_SESSION['activo'])) {
                 header("location: ".base_url);
@@ -14,9 +14,7 @@
             $data= $this->model->getEmpresa();
             $this->views->getView($this,"index",$data);
         }
-        // Inicio de Configuracion de Empresa
-        public function modificar()
-        {
+        public function modificar(){
             $nombre = $_POST['nombre'];
             $ruc =$_POST['ruc'];
             $telefono = $_POST['telefono'];
@@ -32,7 +30,8 @@
             echo json_encode($msg);
             die();
         }
-
+        // Fin de Configuracion de Empresa
+        //************************************** */
         // Inicio de Cargos
         public function cargos(){
             $this->views->getView($this,"cargos");
@@ -43,7 +42,7 @@
                 if($data[$i]['estado'] ==1){
                     $data[$i]['estado'] = '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
                     $data[$i]['acciones']='<div>
-                    <button class="btn btn-primary mb-2" type="button" onclick="btnEditarCar('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-primary" type="button" onclick="btnEditarCar('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
                     <button class="btn btn-danger" type="button" onclick="btnEliminarCar('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
                     </div>';
                 }else {
@@ -108,6 +107,8 @@
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
         }
+         // Fin de Cargos
+        //************************************** */
         // Inicio de Almacenes
         public function almacenes(){
             $this->views->getView($this,"almacenes");
@@ -118,7 +119,7 @@
                 if($data[$i]['estado']== 1){
                     $data[$i]['estado']= '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
                     $data[$i]['acciones']='<div>
-                    <button class="btn btn-primary mb-2" type="button" onclick="btnEditarAlm('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-primary" type="button" onclick="btnEditarAlm('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
                     <button class="btn btn-danger" type="button" onclick="btnEliminarAlm('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
                     </div>';
                 }else {
@@ -187,7 +188,8 @@
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
         }
-
+         // Fin de Almacenes
+        //************************************** */
         // Inicio de Identidades
         public function identidades(){
             $this->views->getView($this,"identidades");
@@ -198,7 +200,7 @@
                 if($data[$i]['estado'] ==1){
                     $data[$i]['estado'] = '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
                     $data[$i]['acciones']='<div>
-                    <button class="btn btn-primary mb-2" type="button" onclick="btnEditarIden('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-primary" type="button" onclick="btnEditarIden('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
                     <button class="btn btn-danger" type="button" onclick="btnEliminarIden('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
                     </div>';
                 }else {
@@ -263,6 +265,8 @@
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
         }
+         // Fin de Identidades
+        //************************************** */
         // Inicio de Documentos
         public function documentos(){
             $this->views->getView($this,"documentos");
@@ -273,7 +277,7 @@
                 if($data[$i]['estado'] ==1){
                     $data[$i]['estado'] = '<span class="p-1 mb-2 bg-success text-white rounded">Activo</span>';
                     $data[$i]['acciones']='<div>
-                    <button class="btn btn-primary mb-2" type="button" onclick="btnEditarDoc('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-primary" type="button" onclick="btnEditarDoc('.$data[$i]['id'].');"><i class="far fa-edit"></i></button>
                     <button class="btn btn-danger" type="button" onclick="btnEliminarDoc('.$data[$i]['id'].');"><i class="fas fa-trash"></i></button>
                     </div>';
                 }else {
@@ -340,6 +344,8 @@
             echo json_encode($msg, JSON_UNESCAPED_UNICODE);
             die();
         }
+         // Fin de Documentos
+        //************************************** */
 
     }
 ?>
