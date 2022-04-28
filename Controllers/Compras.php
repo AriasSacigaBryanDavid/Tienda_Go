@@ -9,11 +9,11 @@
             if (empty($_SESSION['activo'])) {
                 header("location: ".base_url);
             }
-            $this->views->getView($this,"index");
+            $data['documentos']= $this->model->getDocumentos();
+            $data['proveedores']= $this->model->getProveedores();
+            $this->views->getView($this,"index",$data);
         }
-        public function ventas(){
-            $this->views->getView($this,"ventas");
-        }
+        
         public function buscarCodigo($cod){
             $data =$this->model->getProCod($cod);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);

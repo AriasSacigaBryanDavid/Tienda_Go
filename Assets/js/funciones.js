@@ -1,5 +1,6 @@
-let tblUsuarios,tblCargos,tblAlmacenes,tblIdentidades,tblDocumentos,tblProveedores,tblCajas ,tblClientes,tblCategorias,tblMedidas,tblProductos;
+let tblUsuarios,tblCargos,tblAlmacenes,tblIdentidades,tblDocumentos,tblProveedores,tblClientes,tblCajas,tblProductos,tblMarcas,tblCategorias,tblUnidades;
 document.addEventListener("DOMContentLoaded", function(){
+    $('#proveedor').select2();
     /** Inicio de Usuario */
     tblUsuarios = $('#tblUsuarios').DataTable( {
         ajax: {
@@ -1851,39 +1852,9 @@ function buscarCodigo(e){
                     if(this.readyState == 4 && this.status ==200){
                         const res =JSON.parse(this.responseText);
                         if(res){
-                            document.getElementById("nombre").value = res.descripcion;
+                            document.getElementById("nombre").value = res.nombre;
+                            document.getElementById("descripcion").value = res.descripcion;
                             document.getElementById("precio").value = res.precio_compra;
-                            document.getElementById("id").value = res.id;
-                            document.getElementById("cantidad").removeAttribute('disabled');
-                            document.getElementById("cantidad").focus();
-                        }else{
-                            alertas('El Producto no existe', 'warning');
-                            document.getElementById("codigo").value='';
-                            document.getElementById("codigo").focus();
-                        }
-            
-                    }
-            }
-        } 
-    }else{
-        alertas('Ingrese el Código de Barras ', 'warning');
-    }
-}
-function buscarCodigoV(e){
-    e.preventDefault();
-    const cod = document.getElementById("codigo").value;
-    if (cod !='') {
-        if(e.which == 13){
-            const url =base_url + "Compras/buscarCodigo/" + cod;
-            const http=new XMLHttpRequest();
-            http.open("GET", url, true);
-            http.send();
-            http.onreadystatechange=function(){
-                    if(this.readyState == 4 && this.status ==200){
-                        const res =JSON.parse(this.responseText);
-                        if(res){
-                            document.getElementById("nombre").value = res.descripcion;
-                            document.getElementById("precio").value = res.precio_venta;
                             document.getElementById("id").value = res.id;
                             document.getElementById("cantidad").removeAttribute('disabled');
                             document.getElementById("cantidad").focus();
@@ -1944,6 +1915,7 @@ function cargaDetalle(){
            res.detalle.forEach(row => {
                 html +=`<tr>
                     <td>${row['id']}</td>
+                    <td>${row['nombre']}</td>
                     <td>${row['descripcion']}</td>
                     <td>${row['cantidad']}</td>
                     <td>${row['precio']}</td>

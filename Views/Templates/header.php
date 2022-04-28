@@ -10,6 +10,7 @@
         <link href="<?php echo base_url; ?>Assets/css/style.css" rel="stylesheet" />
         <link href="<?php echo base_url; ?>Assets/css/styles.css" rel="stylesheet" />
         <link href="<?php echo base_url; ?>Assets/DataTables/datatables.min.css" rel="stylesheet" crossorigin="anonymous"/>
+        <link href="<?php echo base_url; ?>Assets/css/select2.min.css" rel="stylesheet" />
         <link href="<?php echo base_url; ?>Assets/css/temas.css" rel="stylesheet" />
         <script src="<?php echo base_url; ?>Assets/js/all.min.js" crossorigin="anonymous"></script>
     </head>

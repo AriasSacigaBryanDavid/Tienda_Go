@@ -1,14 +1,48 @@
 <?php include "Views/Templates/header.php";?>
     <div class="card">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h4>Nueva Compra</h4>
-            </div>
+        <!-- titulo de entrada -->
+        <div class="card-header card-header-a text-white">
+             <h4>NUEVA COMPRA</h4>
         </div>
+        <!-- Datos de Entradas -->
         <div class="card-body">
-            <form id="frmCompra">
+            <h5 class="card-title text-center font-weight-bold mb-2"> Detalle de la Entrada</h5>
+            <form id="frmDatoEntrada">
                 <div class="row">
                     <div class="col-md-3">
+                        <div class="form-group mb-3">
+                            <label for="documento"><i class="fas fa-file"></i> Tipo de Documento</label>
+                            <select id="documento" class="form-control" name="documento">
+                                <?php foreach ($data['documentos'] as $row) { ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>  
+                    <div class="col-md-4">
+                        <div class="form-group mb-3">
+                            <label for="n_documento">N° de  Documento</label>
+                            <input id="n_documento" class="form-control" type="text" name="n_documento" placeholder="N° de Documento">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group mb-3">
+                            <label for="proveedor"><i class="fas fa-address-card"></i> Proveedor</label>
+                            <select id="proveedor" class="form-control" name="proveedor">
+                                <?php foreach ($data['proveedores'] as $row) { ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>  
+                </div>
+            </form>
+        </div>
+        <!-- Entradas de Datos -->
+        <div class="card-body bg-secondary text-white">
+            <form id="frmCompra">
+                <div class="row">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="codigo"><i class="fas fa-barcode"></i>Código de barras</label>
                             <input type="hidden" id="id" name="id">
@@ -17,8 +51,14 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="nombre">Descripción</label>
-                            <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Descripción" disabled>
+                            <label for="nombre">Nombre</label>
+                            <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input id="descripcion" class="form-control" type="text" name="descripcion" placeholder="Descripción" disabled>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -63,7 +103,7 @@
     </table>
     <div class="row">
         <div class="col-md-4 ml-auto">
-                <div class="form-group">
+                <div class="form-group text-white">
                 <label for="total" class="font-weight-bold">Total </label>
                 <input id="total" class="form-control" type="text" name="total" placeholder="Total" disabled>
                 <button class="btn btn-primary mt-2 btn-block" type="button" onclick="generarCompra()">Generar Compra</button>
