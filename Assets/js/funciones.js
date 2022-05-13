@@ -546,9 +546,6 @@ function registrarUser(e){
                $("#nuevo_usuario").modal("hide");
                alertas(res.msg, res.icono);
                tblUsuarios.ajax.reload();
-                   
-                
-            
             }
         }
     }
