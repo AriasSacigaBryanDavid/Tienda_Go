@@ -12,8 +12,8 @@
             <thead class="table-a text-white">
                 <tr>
                     <th>Id</th>
-                    <th>nombre</th>
-                    <th>Estado</th>
+                    <th>nombres</th>
+                    <th>Estados</th>
                     <th></th>
                 </tr>
             </thead>
